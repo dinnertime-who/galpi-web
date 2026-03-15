@@ -38,6 +38,21 @@
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
+
+  /* Galpi Design System Colors */
+  --color-galpi-text-primary: var(--galpi-text-primary);
+  --color-galpi-text-secondary: var(--galpi-text-secondary);
+  --color-galpi-text-tertiary: var(--galpi-text-tertiary);
+  --color-galpi-text-inactive: var(--galpi-text-inactive);
+  --color-galpi-surface: var(--galpi-surface);
+  --color-galpi-elevated: var(--galpi-elevated);
+  --color-galpi-muted-surface: var(--galpi-muted-surface);
+  --color-galpi-border-subtle: var(--galpi-border-subtle);
+  --color-galpi-border-strong: var(--galpi-border-strong);
+  --color-galpi-primary-bg: var(--galpi-primary-bg);
+  --color-galpi-primary-fg: var(--galpi-primary-fg);
+  --color-galpi-accent-coral: var(--galpi-accent-coral);
+  --color-galpi-accent-green: var(--galpi-accent-green);
 }
 
 :root {
@@ -94,4 +109,16 @@
   body {
     @apply bg-background/60 text-foreground;
   }
+}
+
+@utility text-galpi-heading {
+  @apply text-lg text-balance break-keep leading-[1.6] text-galpi-text-primary;
+}
+
+@utility text-galpi-body {
+  @apply text-sm text-balance break-keep leading-[1.45] text-galpi-text-secondary;
+}
+
+@utility text-galpi-caption {
+  @apply text-xs text-balance break-keep leading-[1.45] text-galpi-text-tertiary;
 }

@@ -19,7 +19,7 @@ export const RecordMethodDrawer = () => {
   return (
     <Drawer open={isOpen} onOpenChange={toggle}>
       <DrawerContent className="sm:max-w-md mx-auto">
-        <DrawerHeader>
+        <DrawerHeader className="sr-only">
           <DrawerTitle>오늘의 갈피 기록하기</DrawerTitle>
           <DrawerDescription>
             원하는 방법으로 갈피를 기록해주세요.
@@ -28,7 +28,7 @@ export const RecordMethodDrawer = () => {
         <div className="grid grid-cols-2 ">
           <Button
             variant="outline"
-            className="h-24 flex flex-col items-center justify-center border-r-0"
+            className="h-24 flex flex-col items-center justify-center border-r-0 border-t-0"
             onClick={() => {
               router.push("/record");
               close();
@@ -41,7 +41,7 @@ export const RecordMethodDrawer = () => {
           </Button>
           <Button
             variant="outline"
-            className="h-24 flex flex-col items-center justify-center"
+            className="h-24 flex flex-col items-center justify-center border-t-0"
             onClick={() => {
               router.push("/record");
               close();
