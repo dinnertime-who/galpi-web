@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import { Noto_Serif_KR } from "next/font/google";
 import "./globals.css";
-
-const notoSerifKR = Noto_Serif_KR({
-  weight: ["400"],
-  subsets: ["latin"],
-  variable: "--font-noto-serif-kr",
-  display: "swap",
-});
+import { TooltipProvider } from "@/components/shadcn/tooltip";
+import { TanstackQueryProvider } from "@/integrations/tanstack-query/provider";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { ViewTransition } from "react";
+import { Pretendard, Ridi } from "@/config/fonts";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "갈피",
@@ -20,14 +18,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={notoSerifKR.variable}>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
-        />
-      </head>
-      <body className="antialiased">{children}</body>
+    <html
+      lang="ko"
+      className={cn(Pretendard.variable, Ridi.variable, "font-pretendard")}
+    >
+      <body className="antialiased">
+        <TooltipProvider>
+          <TanstackQueryProvider>
+            <NuqsAdapter>
+              <ViewTransition>{children}</ViewTransition>
+            </NuqsAdapter>
+          </TanstackQueryProvider>
+        </TooltipProvider>
+      </body>
     </html>
   );
 }

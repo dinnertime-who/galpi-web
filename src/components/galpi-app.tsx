@@ -11,21 +11,13 @@ import {
   CheckIcon,
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
-import { saveQuote } from "@/app/actions";
-import type { Quote } from "@/lib/quotes";
 
 type View = "main" | "drawer" | "record";
 
 const SERIF = "var(--font-noto-serif-kr), 'Noto Serif KR', serif";
 
 /* ─── Main Screen ─────────────────────────────────────────── */
-function MainScreen({
-  quote,
-  onRecord,
-}: {
-  quote: Quote;
-  onRecord: () => void;
-}) {
+function MainScreen({ quote, onRecord }: { quote: any; onRecord: () => void }) {
   return (
     <div className="flex flex-col h-full bg-[#f0eee9]">
       <div className="flex-1 flex items-center justify-center px-6">
@@ -66,7 +58,7 @@ function DrawerScreen({
   onRecordDirect,
   onRecordSentence,
 }: {
-  quote: Quote;
+  quote: any;
   onClose: () => void;
   onRecordDirect: () => void;
   onRecordSentence: () => void;
@@ -155,7 +147,6 @@ function RecordScreen({ onBack }: { onBack: () => void }) {
   function handleSubmit() {
     if (!hasText) return;
     startTransition(async () => {
-      await saveQuote(text.trim(), source.trim() || undefined);
       router.refresh();
       onBack();
     });
@@ -223,7 +214,7 @@ function RecordScreen({ onBack }: { onBack: () => void }) {
 }
 
 /* ─── Root Client Component ───────────────────────────────── */
-export default function GalpiApp({ initialQuote }: { initialQuote: Quote }) {
+export default function GalpiApp({ initialQuote }: { initialQuote: any }) {
   const [view, setView] = useState<View>("main");
 
   return (
@@ -240,9 +231,7 @@ export default function GalpiApp({ initialQuote }: { initialQuote: Quote }) {
             onRecordSentence={() => setView("record")}
           />
         )}
-        {view === "record" && (
-          <RecordScreen onBack={() => setView("main")} />
-        )}
+        {view === "record" && <RecordScreen onBack={() => setView("main")} />}
       </div>
     </div>
   );
