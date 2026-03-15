@@ -12,8 +12,8 @@ const SAMPLE_QUOTE = {
 
 export function FirstSection() {
   return (
-    <section className="px-6 h-svh flex flex-col items-center justify-center relative">
-        {SAMPLE_QUOTE.source && (
+    <section className="px-6 h-[calc(100svh-4rem)] flex flex-col items-center justify-center relative">
+      {SAMPLE_QUOTE.source && (
         <p className="text-galpi-caption text-center w-full ">
           {SAMPLE_QUOTE.source}
         </p>
