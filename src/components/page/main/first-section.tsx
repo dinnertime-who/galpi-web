@@ -12,7 +12,7 @@ const SAMPLE_QUOTE = {
 export function FirstSection() {
   return (
     <section className="px-6 h-svh flex flex-col items-center justify-center relative">
-      <p className="text-[20px] text-balance break-keep leading-[1.6] text-[#6d6c6a] text-center font-ridi">
+      <p className="text-xl text-balance break-keep leading-[1.6] text-[#6d6c6a] text-center font-ridi">
         {SAMPLE_QUOTE.text}
       </p>
       {SAMPLE_QUOTE.source && (

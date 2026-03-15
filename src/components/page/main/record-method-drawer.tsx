@@ -6,15 +6,15 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerDescription,
-  DrawerFooter,
-  DrawerClose,
 } from "@/components/shadcn/drawer";
 import { Button } from "@/components/shadcn/button";
 import { useRecordMethodDrawerStore } from "@/app/store/record-method-drawer.store";
-import { FileTextIcon, ImageIcon } from "@phosphor-icons/react";
+import { CameraIcon, ImageIcon } from "@phosphor-icons/react/ssr";
+import { useRouter } from "next/navigation";
 
 export const RecordMethodDrawer = () => {
-  const { isOpen, toggle } = useRecordMethodDrawerStore();
+  const router = useRouter();
+  const { isOpen, toggle, close } = useRecordMethodDrawerStore();
 
   return (
     <Drawer open={isOpen} onOpenChange={toggle}>
@@ -29,6 +29,10 @@ export const RecordMethodDrawer = () => {
           <Button
             variant="outline"
             className="h-24 flex flex-col items-center justify-center border-r-0"
+            onClick={() => {
+              router.push("/record");
+              close();
+            }}
           >
             <ImageIcon className="text-primary-foreground size-5" />
             <span className="text-center text-primary-foreground">
@@ -38,8 +42,12 @@ export const RecordMethodDrawer = () => {
           <Button
             variant="outline"
             className="h-24 flex flex-col items-center justify-center"
+            onClick={() => {
+              router.push("/record");
+              close();
+            }}
           >
-            <FileTextIcon className="text-primary-foreground size-5" />
+            <CameraIcon className="text-primary-foreground size-5" />
             <span className="text-center text-primary-foreground">
               지금보는 문장 <br /> 기록하기
             </span>
