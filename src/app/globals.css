@@ -109,6 +109,12 @@
   body {
     @apply bg-background/60 text-foreground;
   }
+  html {
+    scroll-behavior: smooth;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
 
 @utility text-galpi-heading {
