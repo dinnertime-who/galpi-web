@@ -11,10 +11,12 @@ import { Button } from "@/components/shadcn/button";
 import { useRecordMethodDrawerStore } from "@/app/store/record-method-drawer.store";
 import { CameraIcon, ImageIcon } from "@phosphor-icons/react/ssr";
 import { useRouter } from "next/navigation";
+import { useCapturePage } from "../capture-page";
 
 export const RecordMethodDrawer = () => {
   const router = useRouter();
   const { isOpen, toggle, close } = useRecordMethodDrawerStore();
+  const { isCameraOpen, startCapture } = useCapturePage();
 
   return (
     <Drawer open={isOpen} onOpenChange={toggle}>
@@ -43,9 +45,10 @@ export const RecordMethodDrawer = () => {
             variant="outline"
             className="h-24 flex flex-col items-center justify-center border-t-0"
             onClick={() => {
-              router.push("/record");
+              startCapture();
               close();
             }}
+            disabled={isCameraOpen}
           >
             <CameraIcon className="text-primary-foreground size-5" />
             <span className="text-center text-primary-foreground">

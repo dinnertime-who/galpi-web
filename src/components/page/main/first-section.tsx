@@ -14,17 +14,17 @@ export function FirstSection() {
   return (
     <section className="px-6 h-svh flex flex-col items-center justify-center relative">
         {SAMPLE_QUOTE.source && (
-        <p className="text-galpi-body text-center w-full ">
+        <p className="text-galpi-caption text-center w-full ">
           {SAMPLE_QUOTE.source}
         </p>
       )}
 
-      <p className="mt-2 text-galpi-heading text-center font-ridi">
+      <p className="mt-2 text-galpi-heading text-center font-ridi font-bold">
         {SAMPLE_QUOTE.text}
       </p>
 
       {SAMPLE_QUOTE.galpiText && (
-        <p className="mt-8 text-galpi-caption text-end w-full text-primary-foreground/70">
+        <p className="mt-6 text-galpi-caption text-end w-full text-primary-foreground/70">
           {SAMPLE_QUOTE.galpiText}
         </p>
       )}
