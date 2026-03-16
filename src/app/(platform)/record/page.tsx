@@ -1,46 +1,13 @@
-import { Button } from "@/components/shadcn/button";
-import {
-  CameraIcon,
-  ImageIcon,
-  ArrowRightIcon,
-} from "@phosphor-icons/react/ssr";
+import { RecordPageWrapper } from "@/components/page/record/record-page-wrapper";
 
 export default function Page() {
   return (
-    <div className="p-6 flex flex-col gap-y-4 min-h-[calc(100svh-4rem)]">
-      <div className="flex-1 flex flex-col gap-y-2 items-center justify-center">
-        <textarea
-          className="flex-1 text-galpi-heading font-ridi w-full text-center resize-none shadow-none ring-0 focus-visible:ring-0 focus-visible:border-none outline-none h-full border border-border p-6 bg-white"
-          placeholder="기록할 문장을 직접 입력하거나 사진에서 가져오세요."
-        />
-      </div>
-
-      <div className="grid grid-cols-2 gap-x-2">
-        <Button
-          variant="outline"
-          className="w-full h-auto flex flex-col items-center justify-center p-4"
-        >
-          <ImageIcon className="size-6" />
-          <span className="text-galpi-body">사진첩에서 문장 가져오기</span>
-          <span className="text-galpi-caption">오늘 남은 횟수 (1/2회)</span>
-        </Button>
-
-        <Button
-          variant="outline"
-          className="w-full h-auto flex flex-col items-center justify-center p-4"
-        >
-          <CameraIcon className="size-6" />
-          <span className="text-galpi-body">지금보는 문장 가져오기</span>
-          <span className="text-galpi-caption">오늘 남은 횟수 (1/2회)</span>
-        </Button>
-      </div>
-
-      <div className="grid grid-cols-2 gap-x-2">
-        <div></div>
-        <Button className="w-full h-auto flex items-center justify-center p-3 text-galpi-body">
-          <span className="text-primary-foreground">다음으로</span>
-          <ArrowRightIcon className="size-4 text-primary-foreground" />
-        </Button>
+    <div className="p-6 min-h-[calc(100svh-4rem)]">
+      <h1 className="text-galpi-heading font-bold text-center mb-6">
+        오늘의 갈피 기록하기
+      </h1>
+      <div className="overflow-hidden w-full">
+        <RecordPageWrapper initialStep="select-method" />
       </div>
     </div>
   );
