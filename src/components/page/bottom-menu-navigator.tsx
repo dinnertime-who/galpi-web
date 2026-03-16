@@ -26,7 +26,7 @@ export function BottomMenuNavigator({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex items-center justify-between bg-primary/20 border-t border-primary-foreground/10",
+        "flex items-center justify-between bg-[#EBECEB] border-t border-primary-foreground/10",
         className,
       )}
     >

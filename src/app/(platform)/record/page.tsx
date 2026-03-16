@@ -7,10 +7,10 @@ import {
 
 export default function Page() {
   return (
-    <div className="p-6 flex flex-col gap-y-4 h-[calc(100svh-4rem)]">
-      <div className="flex flex-col gap-y-2 items-center justify-center">
+    <div className="p-6 flex flex-col gap-y-4 min-h-[calc(100svh-4rem)]">
+      <div className="flex-1 flex flex-col gap-y-2 items-center justify-center">
         <textarea
-          className="text-galpi-heading font-ridi w-full text-center resize-none shadow-none ring-0 focus-visible:ring-0 focus-visible:border-none outline-none h-[65svh] border border-border p-6 bg-white"
+          className="flex-1 text-galpi-heading font-ridi w-full text-center resize-none shadow-none ring-0 focus-visible:ring-0 focus-visible:border-none outline-none h-full border border-border p-6 bg-white"
           placeholder="기록할 문장을 직접 입력하거나 사진에서 가져오세요."
         />
       </div>
