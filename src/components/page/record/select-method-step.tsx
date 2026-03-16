@@ -1,35 +1,21 @@
 "use client";
 
 import { Button } from "@/components/shadcn/button";
-import { CameraIcon, ImageIcon, PencilIcon } from "@phosphor-icons/react/ssr";
-import { useRecordPageContext } from "./record-page-wrapper";
+import { CameraIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "@/lib/utils";
+import { WriteMethodButton } from "./record-method-buttons/write-method-button";
+import { GalleryMethodButton } from "./record-method-buttons/gallery-method-button";
 
 export function SelectMethodStep() {
-  const { setStep } = useRecordPageContext();
-
   return (
     <div
-      className={cn("flex flex-col gap-y-4 w-full transition-all duration-300")}
+      className={cn(
+        "flex flex-col gap-y-4 min-h-[calc(100svh-4rem)] items-center justify-center",
+      )}
     >
-      <Button
-        variant="outline"
-        className="w-full h-28 flex flex-col items-center justify-center p-4 border-primary-foreground/30"
-        onClick={() => setStep("record")}
-      >
-        <PencilIcon className="size-6" />
-        <span className="text-galpi-body">직접 문장 기록하기</span>
-        <span className="text-galpi-caption"></span>
-      </Button>
+      <WriteMethodButton />
 
-      <Button
-        variant="outline"
-        className="w-full h-28 flex flex-col items-center justify-center p-4 border-primary-foreground/30"
-      >
-        <ImageIcon className="size-6" />
-        <span className="text-galpi-body">사진첩에서 문장 가져오기</span>
-        <span className="text-galpi-caption">오늘 남은 횟수 (1/2회)</span>
-      </Button>
+      <GalleryMethodButton />
 
       <Button
         variant="outline"

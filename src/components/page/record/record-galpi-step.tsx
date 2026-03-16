@@ -1,11 +1,12 @@
 "use client";
 
 import { Button } from "@/components/shadcn/button";
-import { useRecordPageContext } from "./record-page-wrapper";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react/ssr";
+import { useRecordPageStore } from "@/store/record-page.store";
 
 export function RecordGalpiStep() {
-  const { setStep } = useRecordPageContext();
+  const setStep = useRecordPageStore((state) => state.setStep);
+
   return (
     <div className="flex flex-col gap-y-4">
       <div className="flex flex-col gap-y-2 items-center justify-center">
