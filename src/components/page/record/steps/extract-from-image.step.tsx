@@ -51,7 +51,7 @@ function ExtractedImageCanvas() {
 
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-      brushSizeRef.current = Math.max(40, img.width * 0.03);
+      brushSizeRef.current = Math.max(50, img.width * 0.05);
 
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
