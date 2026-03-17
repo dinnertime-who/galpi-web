@@ -1,5 +1,5 @@
-/** biome-ignore-all lint/correctness/useExhaustiveDependencies: <explanation> */
 "use client";
+
 import { useRecordPageStore } from "@/store/record-page.store";
 
 export function ExtractFromImageStep() {

@@ -1,6 +1,5 @@
 "use client";
 
-import { GoogleGenAI } from "@google/genai";
 import type React from "react";
 import { useState, useRef, useEffect } from "react";
 import {
@@ -13,51 +12,7 @@ import {
   CheckCircleIcon,
   ScissorsIcon,
 } from "@phosphor-icons/react";
-
-const apiKey = "AIzaSyAnDZgxPMEmA1-KxcUYi-OKvEMlEU-AvgQ";
-
-const ai = new GoogleGenAI({ apiKey: apiKey });
-
-async function fetchWithRetry(url: string, options: RequestInit, retries = 5) {
-  const delays = [1000, 2000, 4000, 8000, 16000];
-  for (let i = 0; i < retries; i++) {
-    try {
-      const response = await fetch(url, options);
-      if (!response.ok)
-        throw new Error(`HTTP error! status: ${response.status}`);
-      return await response.json();
-    } catch (error) {
-      if (i === retries - 1) throw error;
-      await new Promise((res) => setTimeout(res, delays[i]));
-    }
-  }
-}
-
-async function extractTextFromImage(base64Image: string) {
-  const prompt = `
-    제공된 이미지는 책의 일부 텍스트만 남기고 나머지 배경은 모두 지워버린 뒤, 그 영역만 딱 맞게 오려낸(Cropped) 이미지이다.
-    다음 규칙을 지켜서 텍스트를 추출해라:
-    1. 이미지에 보이는 글자만 그대로 적어라.
-    2. 잘려나가서 읽을 수 없는 글자는 제외해라.
-    3. 문맥을 파악해서 오타(OCR 오류)가 있다면 자연스럽게 교정해라.
-    4. 불필요한 기호나 설명 없이 오직 텍스트만 출력해라.
-  `;
-
-  const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash-lite", // 최신 Flash 모델 지정
-    contents: [
-      prompt, // 텍스트 프롬프트
-      {
-        inlineData: {
-          data: base64Image,
-          mimeType: "image/jpeg",
-        },
-      },
-    ],
-  });
-
-  return response.text || "텍스트를 추출하지 못했습니다.";
-}
+import { extractTextAction } from "@/server/ai/actions/extract-text.action";
 
 export default function App() {
   const [step, setStep] = useState(1);
@@ -296,8 +251,16 @@ export default function App() {
     setIsLoading(true);
     try {
       const base64Data = croppedImageSrc.split(",")[1];
-      const text = await extractTextFromImage(base64Data);
-      setExtractedText(text.trim());
+      const formData = new FormData();
+      formData.append("base64Image", base64Data);
+      const text = await extractTextAction(formData);
+
+      if (text.error || !text.result) {
+        alert(text.error);
+        return;
+      }
+
+      setExtractedText(text.result.trim());
       setStep(4);
     } catch (error) {
       console.error("추출 오류:", error);
