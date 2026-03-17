@@ -17,9 +17,15 @@ export function GalleryMethodButton() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const url = URL.createObjectURL(file);
-    setSelectedImageSrc(url);
-    setStep("extract-from-image");
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      if (event.target?.result && typeof event.target.result === "string") {
+        setSelectedImageSrc(event.target.result);
+        setStep("extract-from-image");
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   return (

@@ -3,13 +3,21 @@
 import { Button } from "@/components/shadcn/button";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react/ssr";
 import { useRecordPageStore } from "@/store/record-page.store";
+import { useState } from "react";
 
 export function RecordGalpiStep() {
   const setStep = useRecordPageStore((state) => state.setStep);
+  const extractedText = useRecordPageStore((state) => state.extractedText);
+
+  const [text, setText] = useState(extractedText || "");
+
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setText(e.target.value);
+  };
 
   return (
     <div className="flex flex-col gap-y-4">
-      <div className="flex flex-col gap-y-2 items-center justify-center">
+      <div className="space-y-2">
         <div className="w-full text-start">
           <h3 className="text-galpi-heading font-ridi">내가 기록할 문장</h3>
           <p className="text-galpi-caption">
@@ -17,12 +25,14 @@ export function RecordGalpiStep() {
           </p>
         </div>
         <textarea
-          className="flex-1 text-galpi-heading font-ridi w-full text-center resize-none shadow-none ring-0 focus-visible:ring-0 focus-visible:border-none outline-none h-full border border-border p-4 bg-white"
+          className="flex-1 text-galpi-heading font-ridi w-full text-center resize-none shadow-none ring-0 focus-visible:ring-0 focus-visible:border-none outline-none h-32 border border-border p-4 bg-white"
           placeholder="기록할 문장을 직접 입력하거나 사진에서 가져오세요."
+          value={text}
+          onChange={handleTextChange}
         />
       </div>
 
-      <div className="flex flex-col gap-y-2 items-center justify-center">
+      <div className="space-y-2">
         <div className="w-full text-start">
           <h3 className="text-galpi-heading font-ridi">갈피 남기기</h3>
           <p className="text-galpi-caption">
@@ -30,7 +40,7 @@ export function RecordGalpiStep() {
           </p>
         </div>
         <textarea
-          className="flex-1 text-galpi-body font-ridi w-full text-start resize-none shadow-none ring-0 focus-visible:ring-0 focus-visible:border-none outline-none h-full border border-border p-4 bg-white"
+          className="flex-1 text-galpi-body font-ridi w-full text-start resize-none shadow-none ring-0 focus-visible:ring-0 focus-visible:border-none outline-none h-48 border border-border p-4 bg-white"
           placeholder="갈피를 남겨주세요."
         />
       </div>
