@@ -4,7 +4,7 @@ services:
     container_name: galpi-postgres
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456
+      POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     ports:
       - "12345:5432"
