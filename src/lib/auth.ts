@@ -1,9 +1,9 @@
 import "server-only";
 
-import { env } from "@/config/env";
-import { db } from "@/integrations/db";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { env } from "@/config/env";
+import { db } from "@/integrations/db";
 
 export const auth = betterAuth({
   secret: env.BETTER_AUTH_SECRET,
@@ -13,5 +13,11 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
+  },
+  socialProviders: {
+    google: {
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    },
   },
 });
