@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { TooltipProvider } from "@/components/shadcn/tooltip";
-import { TanstackQueryProvider } from "@/integrations/tanstack-query/provider";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ViewTransition } from "react";
+import { Toaster } from "@/components/shadcn/sonner";
+import { TooltipProvider } from "@/components/shadcn/tooltip";
 import { Pretendard, Ridi } from "@/config/fonts";
+import { TanstackQueryProvider } from "@/integrations/tanstack-query/provider";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default function RootLayout({
           <TanstackQueryProvider>
             <NuqsAdapter>
               <ViewTransition>{children}</ViewTransition>
+              <Toaster />
             </NuqsAdapter>
           </TanstackQueryProvider>
         </TooltipProvider>

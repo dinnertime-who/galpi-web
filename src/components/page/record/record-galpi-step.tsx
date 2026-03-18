@@ -1,18 +1,34 @@
 "use client";
 
-import { Button } from "@/components/shadcn/button";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react/ssr";
-import { useRecordPageStore } from "@/store/record-page.store";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
+import { Button } from "@/components/shadcn/button";
+import { useSaveGalpi } from "@/hooks/page/record/use-save-galpi";
+import { useRecordPageStore } from "@/store/record-page.store";
 
 export function RecordGalpiStep() {
-  const setStep = useRecordPageStore((state) => state.setStep);
+  const setExtractedText = useRecordPageStore(
+    (state) => state.setExtractedText,
+  );
+  const setSelectedImageSrc = useRecordPageStore(
+    (state) => state.setSelectedImageSrc,
+  );
   const extractedText = useRecordPageStore((state) => state.extractedText);
 
   const [text, setText] = useState(extractedText || "");
+  const [note, setNote] = useState("");
 
-  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(e.target.value);
+  const { saveGalpiMutation } = useSaveGalpi();
+  const router = useRouter();
+
+  const handleSave = async () => {
+    await saveGalpiMutation.mutateAsync({ text, note: note || undefined });
+    toast.success("갈피를 남겼습니다.");
+    setExtractedText(null);
+    setSelectedImageSrc(null);
+    router.push("/");
   };
 
   return (
@@ -28,7 +44,7 @@ export function RecordGalpiStep() {
           className="flex-1 text-galpi-heading font-ridi w-full text-center resize-none shadow-none ring-0 focus-visible:ring-0 focus-visible:border-none outline-none h-32 border border-border p-4 bg-white"
           placeholder="기록할 문장을 직접 입력하거나 사진에서 가져오세요."
           value={text}
-          onChange={handleTextChange}
+          onChange={(e) => setText(e.target.value)}
         />
       </div>
 
@@ -42,6 +58,8 @@ export function RecordGalpiStep() {
         <textarea
           className="flex-1 text-galpi-body font-ridi w-full text-start resize-none shadow-none ring-0 focus-visible:ring-0 focus-visible:border-none outline-none h-48 border border-border p-4 bg-white"
           placeholder="갈피를 남겨주세요."
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
         />
       </div>
 
@@ -65,10 +83,25 @@ export function RecordGalpiStep() {
         </Button>
       </div>
 
+      {saveGalpiMutation.isError && (
+        <p className="text-xs text-destructive text-center">
+          {saveGalpiMutation.error.message}
+        </p>
+      )}
+
+      <Button
+        className="w-full"
+        onClick={handleSave}
+        disabled={!text.trim() || saveGalpiMutation.isPending}
+      >
+        {saveGalpiMutation.isPending ? "저장 중..." : "갈피 저장하기"}
+      </Button>
+
       <Button
         variant="outline"
         className="w-full"
-        onClick={() => setStep("select-method")}
+        onClick={() => router.push("/")}
+        disabled={saveGalpiMutation.isPending}
       >
         처음으로
       </Button>
