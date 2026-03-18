@@ -7,7 +7,7 @@ export function useForgotPassword() {
   const forgotPasswordMutation = useMutation({
     mutationKey: ["auth", "forgot-password"],
     mutationFn: async ({ email }: { email: string }) => {
-      const { error } = await authClient.forgetPassword({
+      const { error } = await authClient.requestPasswordReset({
         email,
         redirectTo: "/reset-password",
       });
