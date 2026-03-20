@@ -58,7 +58,7 @@ export function useExtractCanvas(): UseExtractCanvasReturn {
       originalImgRef.current = img;
       canvas.width = img.width;
       canvas.height = img.height;
-      brushSizeRef.current = Math.max(50, img.width * 0.035);
+      brushSizeRef.current = Math.max(50, img.width * 0.05);
 
       completedPathsRef.current = [];
       currentPathRef.current = [];
