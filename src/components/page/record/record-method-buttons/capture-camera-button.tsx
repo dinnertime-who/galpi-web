@@ -3,7 +3,7 @@
 import { Button } from "@/components/shadcn/button";
 import { cn } from "@/lib/utils";
 import { CameraIcon, XIcon } from "@phosphor-icons/react/ssr";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRecordPageStore } from "@/store/record-page.store";
 
 export function CaptureCameraButton() {
@@ -16,6 +16,14 @@ export function CaptureCameraButton() {
   const capturedCanvas = useRef<HTMLCanvasElement>(null);
 
   const [isCameraOpen, setIsCameraOpen] = useState(false);
+
+  // TODO: Unmount시 스트림 해제 로직 추가
+  // biome-ignore lint/correctness/useExhaustiveDependencies: unmount할때만 실행
+  useEffect(() => {
+    return () => {
+      stopCapture();
+    };
+  }, []);
 
   const startCapture = async () => {
     try {
