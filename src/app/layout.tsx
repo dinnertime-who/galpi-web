@@ -4,6 +4,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ViewTransition } from "react";
 import { Toaster } from "@/components/shadcn/sonner";
 import { TooltipProvider } from "@/components/shadcn/tooltip";
+import { env } from "@/config/env";
 import { Pretendard, Ridi } from "@/config/fonts";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE } from "@/config/site";
 import { TanstackQueryProvider } from "@/integrations/tanstack-query/provider";
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
     default: SITE_TITLE,
     template: `%s - ${SITE_NAME}`,
   },
+  metadataBase: new URL(env.SITE_URL),
   description: SITE_DESCRIPTION,
 };
 
