@@ -1,11 +1,11 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { SelectMethodStep } from "./select-method-step";
-import { RecordGalpiStep } from "./record-galpi-step";
-import { RecordPageState, useRecordPageStore } from "@/store/record-page.store";
-import { ExtractFromImageStep } from "./steps/extract-from-image.step";
 import { useEffect } from "react";
+import { type RecordPageState, useRecordPageStore } from "@/store/record-page.store";
+import { RecordGalpiStep } from "./record-galpi-step";
+import { SelectMethodStep } from "./select-method-step";
+import { ExtractFromImageStep } from "./steps/extract-from-image.step";
 
 const variants = {
   enter: (direction: number) => ({

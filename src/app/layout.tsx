@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={cn(Pretendard.variable, Ridi.variable, "font-pretendard")}>
+    <html lang="ko" data-scroll-behavior="smooth" className={cn(Pretendard.variable, Ridi.variable, "font-pretendard")}>
       <body className="antialiased">
         <TooltipProvider>
           <TanstackQueryProvider>

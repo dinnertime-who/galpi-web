@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/shadcn/button";
+import { Textarea } from "@/components/shadcn/textarea";
 import { useSaveGalpi } from "@/hooks/page/record/use-save-galpi";
 import { useRecordPageStore } from "@/store/record-page.store";
 
@@ -34,8 +35,8 @@ export function RecordGalpiStep() {
           <h3 className="text-galpi-heading font-ridi">내가 기록할 문장</h3>
           <p className="text-galpi-caption">기억에 남기고픈 특별한 문장을 기록해주세요.</p>
         </div>
-        <textarea
-          className="flex-1 text-galpi-heading font-ridi w-full text-center resize-none shadow-none ring-0 focus-visible:ring-0 focus-visible:border-none outline-none h-32 border border-border p-4 bg-white"
+        <Textarea
+          className="flex-1 text-galpi-heading! font-ridi w-full text-center resize-none shadow-none h-32 border border-border p-4 bg-white"
           placeholder="기록할 문장을 직접 입력하거나 사진에서 가져오세요."
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -47,8 +48,8 @@ export function RecordGalpiStep() {
           <h3 className="text-galpi-heading font-ridi">갈피 남기기</h3>
           <p className="text-galpi-caption">문장에 기억을 더 해줄 생각들을 남겨주세요.</p>
         </div>
-        <textarea
-          className="flex-1 text-galpi-body font-ridi w-full text-start resize-none shadow-none ring-0 focus-visible:ring-0 focus-visible:border-none outline-none h-48 border border-border p-4 bg-white"
+        <Textarea
+          className="flex-1 text-galpi-body! font-ridi w-full text-start resize-none shadow-none h-48 border border-border p-4 bg-white"
           placeholder="갈피를 남겨주세요."
           value={note}
           onChange={(e) => setNote(e.target.value)}
