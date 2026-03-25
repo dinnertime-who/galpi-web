@@ -6,23 +6,15 @@ const SAMPLE_QUOTE = {
   galpiText: "xx님이 꽂아둔 갈피가 있습니다.",
 };
 
-type LatestGalpi = { text: string; note: string | null } | null;
-
-type Props = { latestGalpi?: LatestGalpi; userName?: string | null };
-
-export function FirstSection({ latestGalpi, userName }: Props) {
-  const galpiText = userName ? `"${userName}"님이 꽂아둔 갈피가 있습니다.` : SAMPLE_QUOTE.galpiText;
-
-  const quote = latestGalpi ? { text: latestGalpi.text, source: null, galpiText } : { ...SAMPLE_QUOTE, galpiText };
-
+export function FirstSection() {
   return (
     <section className="px-6 h-[calc(100svh-4rem)] flex flex-col items-center justify-center relative">
-      {quote.source && <p className="text-galpi-caption text-center w-full ">{quote.source}</p>}
+      {SAMPLE_QUOTE.source && <p className="text-galpi-caption text-center w-full ">{SAMPLE_QUOTE.source}</p>}
 
-      <p className="mt-2 text-galpi-heading text-center font-ridi font-bold">{quote.text}</p>
+      <p className="mt-2 text-galpi-heading text-center font-ridi font-bold">{SAMPLE_QUOTE.text}</p>
 
-      {quote.galpiText && (
-        <p className="mt-6 text-galpi-caption text-end w-full text-primary-foreground/70">{quote.galpiText}</p>
+      {SAMPLE_QUOTE.galpiText && (
+        <p className="mt-6 text-galpi-caption text-end w-full text-primary-foreground/70">{SAMPLE_QUOTE.galpiText}</p>
       )}
 
       <div className="absolute bottom-0 left-0 right-0 p-6 w-full">
