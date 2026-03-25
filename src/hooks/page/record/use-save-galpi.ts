@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { saveGalpiAction } from "@/server/galpi/actions/save-galpi.action";
+import { saveGalpiAction } from "@/actions/galpi/save-galpi.action";
 
 export function useSaveGalpi() {
   const saveGalpiMutation = useMutation({
