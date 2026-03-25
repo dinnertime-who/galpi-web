@@ -1,24 +1,38 @@
 "use client";
 
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { GoogleLogo } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { Button } from "@/components/shadcn/button";
+import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/shadcn/field";
 import { Input } from "@/components/shadcn/input";
-import { Label } from "@/components/shadcn/label";
 import { Separator } from "@/components/shadcn/separator";
 import { useSignIn } from "@/hooks/page/sign-in/use-sign-in";
 
+const schema = z.object({
+  email: z.string().email("올바른 이메일 형식이 아닙니다."),
+  password: z.string().min(1, "비밀번호를 입력해주세요."),
+});
+
+type FormValues = z.infer<typeof schema>;
+
 export function SignInForm() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const { signInMutation, signInWithGoogle } = useSignIn();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await signInMutation.mutateAsync({ email, password });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: standardSchemaResolver(schema),
+  });
+
+  const onSubmit = async (values: FormValues) => {
+    await signInMutation.mutateAsync(values);
     router.push("/");
   };
 
@@ -40,42 +54,44 @@ export function SignInForm() {
         <Separator className="flex-1" />
       </div>
 
-      <form className="space-y-4" onSubmit={handleSubmit}>
-        <div className="space-y-1.5">
-          <Label htmlFor="email">이메일</Label>
-          <Input
-            id="email"
-            type="email"
-            placeholder="name@example.com"
-            autoComplete="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <FieldGroup>
+          <Field data-invalid={!!errors.email}>
+            <FieldLabel htmlFor="email">이메일</FieldLabel>
+            <Input
+              id="email"
+              type="email"
+              placeholder="name@example.com"
+              autoComplete="email"
+              aria-invalid={!!errors.email}
+              {...register("email")}
+            />
+            <FieldError errors={[errors.email]} />
+          </Field>
 
-        <div className="space-y-1.5">
-          <div className="flex items-center justify-between">
-            <Label htmlFor="password">비밀번호</Label>
-            <Link
-              href="/forgot-password"
-              className="text-xs text-muted-foreground hover:text-foreground underline-offset-4 hover:underline"
-            >
-              비밀번호 찾기
-            </Link>
-          </div>
-          <Input
-            id="password"
-            type="password"
-            placeholder="••••••••"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+          <Field data-invalid={!!errors.password}>
+            <div className="flex items-center justify-between">
+              <FieldLabel htmlFor="password">비밀번호</FieldLabel>
+              <Link
+                href="/forgot-password"
+                className="text-xs text-muted-foreground hover:text-foreground underline-offset-4 hover:underline"
+              >
+                비밀번호 찾기
+              </Link>
+            </div>
+            <Input
+              id="password"
+              type="password"
+              placeholder="••••••••"
+              autoComplete="current-password"
+              aria-invalid={!!errors.password}
+              {...register("password")}
+            />
+            <FieldError errors={[errors.password]} />
+          </Field>
+        </FieldGroup>
 
-        {signInMutation.isError && <p className="text-xs text-destructive">{signInMutation.error.message}</p>}
+        {signInMutation.isError && <FieldError>{signInMutation.error.message}</FieldError>}
 
         <Button type="submit" className="w-full" disabled={signInMutation.isPending}>
           {signInMutation.isPending ? "로그인 중..." : "로그인"}
