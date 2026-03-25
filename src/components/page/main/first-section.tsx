@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getMainGalpiAction } from "@/actions/galpi/get-main-galpi.action";
 import { RecordButton } from "./record-button";
 
@@ -10,16 +11,16 @@ const SAMPLE_QUOTE = {
 export async function FirstSection() {
   const { result, error } = await getMainGalpiAction();
 
-  const quote =
-    !error && result
-      ? {
-          text: result.sentence.text,
-          source: result.source
-            ? `${result.source.author} <${result.source.title} ${result.source.page ? `p. ${result.source.page}` : ""}> ${result.source.subTitle ? `- ${result.source.subTitle}` : ""} 중에서`
-            : null,
-          galpiText: result.galpi && result.author ? `"${result.author.name}"님이 꽂아둔 갈피가 있습니다.` : null,
-        }
-      : SAMPLE_QUOTE;
+  const data = !error && result ? result : null;
+
+  const quote = data
+    ? {
+        text: data.sentence.text,
+        source: data.source
+          ? `${data.source.author} <${data.source.title}> ${data.source.page ? `p. ${data.source.page}` : ""} ${data.source.subTitle ? `- ${data.source.subTitle}` : ""} 에서`
+          : null,
+      }
+    : SAMPLE_QUOTE;
 
   return (
     <section className="px-6 h-[calc(100svh-4rem)] flex flex-col items-center justify-center relative">
@@ -27,8 +28,13 @@ export async function FirstSection() {
 
       <p className="mt-2 text-galpi-heading text-center font-ridi font-bold">{quote.text}</p>
 
-      {quote.galpiText && (
-        <p className="mt-6 text-galpi-caption text-end w-full text-primary-foreground/70">{quote.galpiText}</p>
+      {data?.galpi && data.author && (
+        <Link
+          href={`/galpi/${data.galpi.id}`}
+          className="mt-6 text-galpi-caption text-end w-full text-primary-foreground/70 underline-offset-2 hover:underline"
+        >
+          — "{data.author.name}"님이 갈피를 남겼습니다.
+        </Link>
       )}
 
       <div className="absolute bottom-0 left-0 right-0 p-6 w-full">
