@@ -97,7 +97,7 @@
 }
 
 @utility text-galpi-heading {
-  @apply text-lg text-balance break-keep leading-[1.6] text-primary-foreground;
+  @apply text-base text-balance break-keep leading-[1.6] text-primary-foreground;
 }
 
 @utility text-galpi-body {
