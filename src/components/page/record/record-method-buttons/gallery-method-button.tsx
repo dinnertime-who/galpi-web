@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "@/components/shadcn/button";
 import { ImageIcon } from "@phosphor-icons/react/ssr";
 import { useRef } from "react";
+import { Button } from "@/components/shadcn/button";
 import { useRecordPageStore } from "@/store/record-page.store";
 
 export function GalleryMethodButton() {
@@ -35,7 +35,6 @@ export function GalleryMethodButton() {
       >
         <ImageIcon className="size-6" />
         <span className="text-galpi-body">사진첩에서 문장 가져오기</span>
-        <span className="text-galpi-caption">오늘 남은 횟수 (1/2회)</span>
       </Button>
 
       <input type="file" accept="image/*" ref={fileInputRef} onChange={handleFileChange} className="hidden" />

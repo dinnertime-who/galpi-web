@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/shadcn/button";
-import { cn } from "@/lib/utils";
 import { CameraIcon, XIcon } from "@phosphor-icons/react/ssr";
 import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/shadcn/button";
+import { cn } from "@/lib/utils";
 import { useRecordPageStore } from "@/store/record-page.store";
 
 export function CaptureCameraButton() {
@@ -99,7 +99,6 @@ export function CaptureCameraButton() {
       >
         <CameraIcon className="size-6" />
         <span className="text-galpi-body">지금보는 문장 가져오기</span>
-        <span className="text-galpi-caption">오늘 남은 횟수 (1/2회)</span>
       </Button>
 
       <div className={cn("fixed inset-0 z-50", isCameraOpen ? "" : "hidden")}>

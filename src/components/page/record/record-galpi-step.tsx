@@ -10,7 +10,9 @@ import { z } from "zod";
 import { Button } from "@/components/shadcn/button";
 import { Field, FieldError, FieldGroup } from "@/components/shadcn/field";
 import { Textarea } from "@/components/shadcn/textarea";
+import { useSetPendingRecord } from "@/hooks/auth/use-set-pending-record";
 import { useSaveGalpi } from "@/hooks/page/record/use-save-galpi";
+import { authClient } from "@/lib/auth-client";
 import { useRecordPageStore } from "@/store/record-page.store";
 
 const schema = z.object({
@@ -25,7 +27,10 @@ export function RecordGalpiStep() {
   const setSelectedImageSrc = useRecordPageStore((state) => state.setSelectedImageSrc);
   const extractedText = useRecordPageStore((state) => state.extractedText);
 
+  const { data } = authClient.useSession();
+
   const { saveGalpiMutation } = useSaveGalpi();
+  const { setPendingRecordMutation } = useSetPendingRecord();
   const router = useRouter();
 
   const {
@@ -45,6 +50,11 @@ export function RecordGalpiStep() {
   }, [extractedText, reset]);
 
   const onSubmit = async (values: FormValues) => {
+    if (!data) {
+      await setPendingRecordMutation.mutateAsync(values);
+      return router.push("/sign-in");
+    }
+
     await saveGalpiMutation.mutateAsync({ text: values.text, note: values.note || undefined });
     toast.success("갈피를 남겼습니다.");
     setExtractedText(null);
@@ -100,9 +110,7 @@ export function RecordGalpiStep() {
         </Button>
       </div>
 
-      {saveGalpiMutation.isError && (
-        <FieldError className="text-center">{saveGalpiMutation.error.message}</FieldError>
-      )}
+      {saveGalpiMutation.isError && <FieldError className="text-center">{saveGalpiMutation.error.message}</FieldError>}
 
       <Button type="submit" className="w-full" disabled={!isValid || saveGalpiMutation.isPending}>
         {saveGalpiMutation.isPending ? "저장 중..." : "갈피 저장하기"}
