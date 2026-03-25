@@ -6,15 +6,7 @@ import { authClient } from "@/lib/auth-client";
 export function useSignUp() {
   const signUpMutation = useMutation({
     mutationKey: ["auth", "sign-up"],
-    mutationFn: async ({
-      name,
-      email,
-      password,
-    }: {
-      name: string;
-      email: string;
-      password: string;
-    }) => {
+    mutationFn: async ({ name, email, password }: { name: string; email: string; password: string }) => {
       const { error } = await authClient.signUp.email({
         name,
         email,
@@ -24,8 +16,7 @@ export function useSignUp() {
     },
   });
 
-  const signUpWithGoogle = () =>
-    authClient.signIn.social({ provider: "google", callbackURL: "/" });
+  const signUpWithGoogle = () => authClient.signIn.social({ provider: "google", callbackURL: "/" });
 
   return { signUpMutation, signUpWithGoogle };
 }

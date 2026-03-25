@@ -26,17 +26,10 @@ export function SignInForm() {
     <div className="w-full max-w-sm space-y-6">
       <div className="space-y-1">
         <h1 className="text-lg font-semibold">로그인</h1>
-        <p className="text-xs text-muted-foreground">
-          갈피에 오신 것을 환영합니다.
-        </p>
+        <p className="text-xs text-muted-foreground">갈피에 오신 것을 환영합니다.</p>
       </div>
 
-      <Button
-        variant="outline"
-        className="w-full"
-        onClick={signInWithGoogle}
-        disabled={signInMutation.isPending}
-      >
+      <Button variant="outline" className="w-full" onClick={signInWithGoogle} disabled={signInMutation.isPending}>
         <GoogleLogo weight="bold" />
         Google로 계속하기
       </Button>
@@ -82,27 +75,16 @@ export function SignInForm() {
           />
         </div>
 
-        {signInMutation.isError && (
-          <p className="text-xs text-destructive">
-            {signInMutation.error.message}
-          </p>
-        )}
+        {signInMutation.isError && <p className="text-xs text-destructive">{signInMutation.error.message}</p>}
 
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={signInMutation.isPending}
-        >
+        <Button type="submit" className="w-full" disabled={signInMutation.isPending}>
           {signInMutation.isPending ? "로그인 중..." : "로그인"}
         </Button>
       </form>
 
       <p className="text-center text-xs text-muted-foreground">
         계정이 없으신가요?{" "}
-        <Link
-          href="/sign-up"
-          className="text-foreground underline-offset-4 hover:underline"
-        >
+        <Link href="/sign-up" className="text-foreground underline-offset-4 hover:underline">
           회원가입
         </Link>
       </p>

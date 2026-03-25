@@ -9,12 +9,8 @@ import { useSaveGalpi } from "@/hooks/page/record/use-save-galpi";
 import { useRecordPageStore } from "@/store/record-page.store";
 
 export function RecordGalpiStep() {
-  const setExtractedText = useRecordPageStore(
-    (state) => state.setExtractedText,
-  );
-  const setSelectedImageSrc = useRecordPageStore(
-    (state) => state.setSelectedImageSrc,
-  );
+  const setExtractedText = useRecordPageStore((state) => state.setExtractedText);
+  const setSelectedImageSrc = useRecordPageStore((state) => state.setSelectedImageSrc);
   const extractedText = useRecordPageStore((state) => state.extractedText);
 
   const [text, setText] = useState(extractedText || "");
@@ -36,9 +32,7 @@ export function RecordGalpiStep() {
       <div className="space-y-2">
         <div className="w-full text-start">
           <h3 className="text-galpi-heading font-ridi">내가 기록할 문장</h3>
-          <p className="text-galpi-caption">
-            기억에 남기고픈 특별한 문장을 기록해주세요.
-          </p>
+          <p className="text-galpi-caption">기억에 남기고픈 특별한 문장을 기록해주세요.</p>
         </div>
         <textarea
           className="flex-1 text-galpi-heading font-ridi w-full text-center resize-none shadow-none ring-0 focus-visible:ring-0 focus-visible:border-none outline-none h-32 border border-border p-4 bg-white"
@@ -51,9 +45,7 @@ export function RecordGalpiStep() {
       <div className="space-y-2">
         <div className="w-full text-start">
           <h3 className="text-galpi-heading font-ridi">갈피 남기기</h3>
-          <p className="text-galpi-caption">
-            문장에 기억을 더 해줄 생각들을 남겨주세요.
-          </p>
+          <p className="text-galpi-caption">문장에 기억을 더 해줄 생각들을 남겨주세요.</p>
         </div>
         <textarea
           className="flex-1 text-galpi-body font-ridi w-full text-start resize-none shadow-none ring-0 focus-visible:ring-0 focus-visible:border-none outline-none h-48 border border-border p-4 bg-white"
@@ -66,9 +58,7 @@ export function RecordGalpiStep() {
       <div className="flex flex-col gap-y-2 items-center justify-center">
         <div className="w-full text-start">
           <h3 className="text-galpi-heading font-ridi">출처(선택)</h3>
-          <p className="text-galpi-caption">
-            어떤 책에서 찾은 문장이신가요? ISBN 또는 책 이름으로 검색해보세요.
-          </p>
+          <p className="text-galpi-caption">어떤 책에서 찾은 문장이신가요? ISBN 또는 책 이름으로 검색해보세요.</p>
         </div>
 
         <div className="text-galpi-caption font-ridi w-full ">
@@ -84,16 +74,10 @@ export function RecordGalpiStep() {
       </div>
 
       {saveGalpiMutation.isError && (
-        <p className="text-xs text-destructive text-center">
-          {saveGalpiMutation.error.message}
-        </p>
+        <p className="text-xs text-destructive text-center">{saveGalpiMutation.error.message}</p>
       )}
 
-      <Button
-        className="w-full"
-        onClick={handleSave}
-        disabled={!text.trim() || saveGalpiMutation.isPending}
-      >
+      <Button className="w-full" onClick={handleSave} disabled={!text.trim() || saveGalpiMutation.isPending}>
         {saveGalpiMutation.isPending ? "저장 중..." : "갈피 저장하기"}
       </Button>
 

@@ -29,26 +29,15 @@ function ExtractedImageCanvas() {
   return (
     <div className="flex-1 flex flex-col gap-y-2">
       <div>
-        <h2 className="text-galpi-heading font-ridi">
-          원하는 문장을 선택해주세요.
-        </h2>
+        <h2 className="text-galpi-heading font-ridi">원하는 문장을 선택해주세요.</h2>
         <p className="text-galpi-caption">터치나 드래그로 선택할 수 있습니다.</p>
       </div>
 
       <div className="flex gap-x-2 w-full">
-        <Button
-          variant="outline"
-          onClick={handleClear}
-          className="flex-1 bg-white"
-        >
+        <Button variant="outline" onClick={handleClear} className="flex-1 bg-white">
           다시 선택하기
         </Button>
-        <Button
-          variant="default"
-          onClick={handlePreview}
-          disabled={isLoading}
-          className="flex-1"
-        >
+        <Button variant="default" onClick={handlePreview} disabled={isLoading} className="flex-1">
           선택한 문장 오려내기 <ScissorsIcon className="w-5 h-5" />
         </Button>
       </div>
@@ -63,12 +52,7 @@ function ExtractedImageCanvas() {
               className="max-w-full h-auto max-h-[400px] object-contain"
             />
           </div>
-          <Button
-            variant="default"
-            onClick={handleFinalExtract}
-            disabled={isLoading}
-            className="w-full"
-          >
+          <Button variant="default" onClick={handleFinalExtract} disabled={isLoading} className="w-full">
             문장 가져오기
           </Button>
         </>

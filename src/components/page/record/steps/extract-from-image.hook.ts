@@ -27,13 +27,9 @@ export type UseExtractCanvasReturn = {
 };
 
 export function useExtractCanvas(): UseExtractCanvasReturn {
-  const selectedImageSrc = useRecordPageStore(
-    (state) => state.selectedImageSrc,
-  );
+  const selectedImageSrc = useRecordPageStore((state) => state.selectedImageSrc);
   const setStep = useRecordPageStore((state) => state.setStep);
-  const setExtractedText = useRecordPageStore(
-    (state) => state.setExtractedText,
-  );
+  const setExtractedText = useRecordPageStore((state) => state.setExtractedText);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const brushSizeRef = useRef<number>(50);
@@ -188,12 +184,7 @@ export function useExtractCanvas(): UseExtractCanvasReturn {
 
       // 3. outline 포인트 기반 bbox 계산 (더 정확)
       const padding = brushSize * 0.15;
-      const { minX, minY, maxX, maxY } = computeBoundingBox(
-        outlines,
-        canvas.width,
-        canvas.height,
-        padding,
-      );
+      const { minX, minY, maxX, maxY } = computeBoundingBox(outlines, canvas.width, canvas.height, padding);
 
       const cropWidth = maxX - minX;
       const cropHeight = maxY - minY;
@@ -204,17 +195,7 @@ export function useExtractCanvas(): UseExtractCanvasReturn {
       const cropCtx = cropCanvas.getContext("2d");
       if (!cropCtx) return;
 
-      cropCtx.drawImage(
-        finalCanvas,
-        minX,
-        minY,
-        cropWidth,
-        cropHeight,
-        0,
-        0,
-        cropWidth,
-        cropHeight,
-      );
+      cropCtx.drawImage(finalCanvas, minX, minY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
 
       setCroppedImageSrc(cropCanvas.toDataURL("image/jpeg", 0.9));
     } catch (error) {

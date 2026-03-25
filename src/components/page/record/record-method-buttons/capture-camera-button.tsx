@@ -8,9 +8,7 @@ import { useRecordPageStore } from "@/store/record-page.store";
 
 export function CaptureCameraButton() {
   const setStep = useRecordPageStore((state) => state.setStep);
-  const setSelectedImageSrc = useRecordPageStore(
-    (state) => state.setSelectedImageSrc,
-  );
+  const setSelectedImageSrc = useRecordPageStore((state) => state.setSelectedImageSrc);
   const streamView = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const capturedCanvas = useRef<HTMLCanvasElement>(null);
@@ -116,11 +114,7 @@ export function CaptureCameraButton() {
           onClick={captureFrame}
         />
 
-        <p
-          className={cn(
-            "absolute left-1/2 -translate-x-1/2 bottom-[5svh] text-galpi-body",
-          )}
-        >
+        <p className={cn("absolute left-1/2 -translate-x-1/2 bottom-[5svh] text-galpi-body")}>
           화면을 터치해서 원하는 문장을 찍으세요
         </p>
 

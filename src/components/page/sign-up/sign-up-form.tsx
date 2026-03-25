@@ -30,12 +30,7 @@ export function SignUpForm() {
         <p className="text-xs text-muted-foreground">갈피를 시작해보세요.</p>
       </div>
 
-      <Button
-        variant="outline"
-        className="w-full"
-        onClick={signUpWithGoogle}
-        disabled={signUpMutation.isPending}
-      >
+      <Button variant="outline" className="w-full" onClick={signUpWithGoogle} disabled={signUpMutation.isPending}>
         <GoogleLogo weight="bold" />
         Google로 계속하기
       </Button>
@@ -86,27 +81,16 @@ export function SignUpForm() {
           />
         </div>
 
-        {signUpMutation.isError && (
-          <p className="text-xs text-destructive">
-            {signUpMutation.error.message}
-          </p>
-        )}
+        {signUpMutation.isError && <p className="text-xs text-destructive">{signUpMutation.error.message}</p>}
 
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={signUpMutation.isPending}
-        >
+        <Button type="submit" className="w-full" disabled={signUpMutation.isPending}>
           {signUpMutation.isPending ? "가입 중..." : "회원가입"}
         </Button>
       </form>
 
       <p className="text-center text-xs text-muted-foreground">
         이미 계정이 있으신가요?{" "}
-        <Link
-          href="/sign-in"
-          className="text-foreground underline-offset-4 hover:underline"
-        >
+        <Link href="/sign-in" className="text-foreground underline-offset-4 hover:underline">
           로그인
         </Link>
       </p>

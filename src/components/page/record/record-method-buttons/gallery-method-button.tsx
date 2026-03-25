@@ -9,9 +9,7 @@ export function GalleryMethodButton() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const setStep = useRecordPageStore((state) => state.setStep);
-  const setSelectedImageSrc = useRecordPageStore(
-    (state) => state.setSelectedImageSrc,
-  );
+  const setSelectedImageSrc = useRecordPageStore((state) => state.setSelectedImageSrc);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -40,13 +38,7 @@ export function GalleryMethodButton() {
         <span className="text-galpi-caption">오늘 남은 횟수 (1/2회)</span>
       </Button>
 
-      <input
-        type="file"
-        accept="image/*"
-        ref={fileInputRef}
-        onChange={handleFileChange}
-        className="hidden"
-      />
+      <input type="file" accept="image/*" ref={fileInputRef} onChange={handleFileChange} className="hidden" />
     </>
   );
 }

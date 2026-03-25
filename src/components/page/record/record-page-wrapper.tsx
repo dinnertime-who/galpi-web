@@ -22,13 +22,8 @@ const variants = {
   }),
 };
 
-export function RecordPageWrapper({
-  initialStep,
-}: {
-  initialStep: RecordPageState["step"];
-}) {
-  const { step, selectedImageSrc, setStep, setSelectedImageSrc } =
-    useRecordPageStore();
+export function RecordPageWrapper({ initialStep }: { initialStep: RecordPageState["step"] }) {
+  const { step, selectedImageSrc, setStep, setSelectedImageSrc } = useRecordPageStore();
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: initialStep 변경 시에만 실행
   useEffect(() => {

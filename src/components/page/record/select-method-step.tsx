@@ -7,11 +7,7 @@ import { CaptureCameraButton } from "./record-method-buttons/capture-camera-butt
 
 export function SelectMethodStep() {
   return (
-    <div
-      className={cn(
-        "flex flex-col gap-y-4 min-h-[calc(100svh-4rem)] items-center justify-center",
-      )}
-    >
+    <div className={cn("flex flex-col gap-y-4 min-h-[calc(100svh-4rem)] items-center justify-center")}>
       <WriteMethodButton />
 
       <GalleryMethodButton />

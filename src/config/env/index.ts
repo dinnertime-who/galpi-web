@@ -2,11 +2,13 @@ import { z } from "zod";
 
 const EnvSchema = z.object({
   GEMINI_API_KEY: z.string(),
-  DATABASE_URL: z.string().url(),
+  DATABASE_URL: z.url(),
   BETTER_AUTH_SECRET: z.string(),
-  BETTER_AUTH_URL: z.string().url(),
+  BETTER_AUTH_URL: z.url(),
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
+
+  SITE_URL: z.url(),
 });
 
 export const env = EnvSchema.parse({
@@ -16,5 +18,7 @@ export const env = EnvSchema.parse({
   BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+
+  SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
 });
 export type Env = z.infer<typeof EnvSchema>;

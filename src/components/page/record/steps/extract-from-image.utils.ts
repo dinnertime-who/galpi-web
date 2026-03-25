@@ -3,19 +3,12 @@ import { getStroke } from "perfect-freehand";
 export type InputPoint = [x: number, y: number, pressure: number];
 export type OutlinePoint = [x: number, y: number];
 
-export function toInputPoint(
-  e: PointerEvent,
-  canvas: HTMLCanvasElement,
-): InputPoint {
+export function toInputPoint(e: PointerEvent, canvas: HTMLCanvasElement): InputPoint {
   const rect = canvas.getBoundingClientRect();
   const scaleX = canvas.width / rect.width;
   const scaleY = canvas.height / rect.height;
   const pressure = e.pressure > 0 ? e.pressure : 0.5;
-  return [
-    (e.clientX - rect.left) * scaleX,
-    (e.clientY - rect.top) * scaleY,
-    pressure,
-  ];
+  return [(e.clientX - rect.left) * scaleX, (e.clientY - rect.top) * scaleY, pressure];
 }
 
 export function getFreehandOptions(brushSize: number, last = false) {
@@ -37,10 +30,7 @@ export function getSvgPathFromOutline(outline: number[][]): Path2D {
   path.moveTo(first[0], first[1]);
 
   for (let i = 1; i < rest.length - 1; i++) {
-    const mid = [
-      (rest[i][0] + rest[i + 1][0]) / 2,
-      (rest[i][1] + rest[i + 1][1]) / 2,
-    ];
+    const mid = [(rest[i][0] + rest[i + 1][0]) / 2, (rest[i][1] + rest[i + 1][1]) / 2];
     path.quadraticCurveTo(rest[i][0], rest[i][1], mid[0], mid[1]);
   }
 
@@ -59,13 +49,7 @@ type RenderCanvasParams = {
   brushSize: number;
 };
 
-export function renderCanvas({
-  ctx,
-  image,
-  completedPaths,
-  currentPath,
-  brushSize,
-}: RenderCanvasParams): void {
+export function renderCanvas({ ctx, image, completedPaths, currentPath, brushSize }: RenderCanvasParams): void {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   ctx.drawImage(image, 0, 0, ctx.canvas.width, ctx.canvas.height);
 

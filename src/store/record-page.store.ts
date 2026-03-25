@@ -12,13 +12,11 @@ type RecordPageActions = {
   setExtractedText: (extractedText: RecordPageState["extractedText"]) => void;
 };
 
-export const useRecordPageStore = create<RecordPageState & RecordPageActions>(
-  (set) => ({
-    step: "select-method",
-    selectedImageSrc: null,
-    extractedText: null,
-    setStep: (step) => set({ step }),
-    setSelectedImageSrc: (imageSrc) => set({ selectedImageSrc: imageSrc }),
-    setExtractedText: (extractedText) => set({ extractedText }),
-  }),
-);
+export const useRecordPageStore = create<RecordPageState & RecordPageActions>((set) => ({
+  step: "select-method",
+  selectedImageSrc: null,
+  extractedText: null,
+  setStep: (step) => set({ step }),
+  setSelectedImageSrc: (imageSrc) => set({ selectedImageSrc: imageSrc }),
+  setExtractedText: (extractedText) => set({ extractedText }),
+}));

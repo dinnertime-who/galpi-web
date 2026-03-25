@@ -13,10 +13,7 @@ export async function saveGalpiAction(input: SaveGalpiInput) {
 
   try {
     const result = await db.transaction(async (tx) => {
-      const [sentence] = await tx
-        .insert(sentences)
-        .values({ userId: session.user.id, text: input.text })
-        .returning();
+      const [sentence] = await tx.insert(sentences).values({ userId: session.user.id, text: input.text }).returning();
 
       const [galpi] = await tx
         .insert(galpis)

@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE } from "@/config/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "/",
-    name: "갈피 - 하루를 기록하는 또다른 방법",
-    short_name: "갈피",
-    description: "갈피 - 하루를 기록하는 또다른 방법",
+    name: SITE_TITLE,
+    short_name: SITE_NAME,
+    description: SITE_DESCRIPTION,
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

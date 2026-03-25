@@ -25,16 +25,10 @@ export function BottomMenuNavigator({ className }: { className?: string }) {
 
   return (
     <div
-      className={cn(
-        "flex items-center justify-between bg-[#EBECEB] border-t border-primary-foreground/10",
-        className,
-      )}
+      className={cn("flex items-center justify-between bg-[#EBECEB] border-t border-primary-foreground/10", className)}
     >
       {menuItems.map((item) => (
-        <div
-          className="flex-1 flex items-center justify-center"
-          key={item.href}
-        >
+        <div className="flex-1 flex items-center justify-center" key={item.href}>
           <Link
             href={item.href}
             className={cn(
