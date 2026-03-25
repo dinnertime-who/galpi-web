@@ -1,5 +1,4 @@
 import { getMainGalpiAction } from "@/actions/galpi/get-main-galpi.action";
-import { TestView } from "@/components/test-view/test-view";
 import { RecordButton } from "./record-button";
 
 const SAMPLE_QUOTE = {
@@ -10,8 +9,6 @@ const SAMPLE_QUOTE = {
 
 export async function FirstSection() {
   const { result, error } = await getMainGalpiAction();
-
-  console.log(result, error);
 
   const quote =
     !error && result
@@ -37,8 +34,6 @@ export async function FirstSection() {
       <div className="absolute bottom-0 left-0 right-0 p-6 w-full">
         <RecordButton className="w-full" />
       </div>
-
-      <TestView />
     </section>
   );
 }
