@@ -23,6 +23,7 @@ export async function getGalpiByIdAction(input: GetGalpiByIdActionRequest) {
         galpiNote: galpis.note,
         sentenceId: sentences.id,
         sentenceText: sentences.text,
+        sentenceCreatedAt: sentences.createdAt,
         sourceTitle: sources.title,
         sourceAuthor: sources.author,
         sourceSubTitle: sources.subTitle,
@@ -53,6 +54,7 @@ export async function getGalpiByIdAction(input: GetGalpiByIdActionRequest) {
       sentence: {
         id: row.sentenceId,
         text: row.sentenceText,
+        createdAt: row.sentenceCreatedAt,
       },
       source:
         row.sourceTitle && row.sourceAuthor

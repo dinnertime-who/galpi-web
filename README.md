@@ -1,36 +1,20 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 갈피
 
-## Getting Started
+> 책 속 문장을 기록하고, 나만의 생각을 남기는 공간
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 갈피란?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**갈피**는 책을 읽다 마음에 남는 문장을 기록하는 서비스입니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+책갈피처럼 그 순간을 표시해두고, 문장과 함께 그때의 생각이나 감상을 함께 남길 수 있어요.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 무엇을 할 수 있나요?
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **문장 기록** — 책에서 발견한 문장과 출처(책 제목, 저자, 페이지)를 저장합니다.
+- **갈피 남기기** — 문장에 나만의 생각이나 감상을 덧붙입니다.
+- **내 책장** — 지금까지 기록한 모든 문장을 한눈에 모아볼 수 있습니다.
+- **함께 보기** — 다른 사람들이 남긴 갈피도 메인 화면에서 확인할 수 있습니다.
