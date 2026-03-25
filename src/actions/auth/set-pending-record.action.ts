@@ -4,13 +4,22 @@ import { cookies } from "next/headers";
 import { z } from "zod";
 import { validateRequest } from "../utils";
 
-export const SetPendingRecordRequest = z.object({
+const setPendingRecordRequest = z.object({
   text: z.string().min(1),
   note: z.string().optional(),
+  source: z
+    .object({
+      title: z.string().min(1),
+      author: z.string().min(1),
+      subTitle: z.string().optional(),
+      page: z.number().int().positive().optional(),
+    })
+    .optional(),
 });
+export type SetPendingRecordRequest = z.infer<typeof setPendingRecordRequest>;
 
-export async function setPendingRecordAction(values: z.infer<typeof SetPendingRecordRequest>) {
-  const { data, error } = validateRequest(SetPendingRecordRequest, values);
+export async function setPendingRecordAction(values: SetPendingRecordRequest) {
+  const { data, error } = validateRequest(setPendingRecordRequest, values);
   if (error) return { error: error.message };
 
   const cookieStore = await cookies();

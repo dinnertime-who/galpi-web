@@ -12,7 +12,7 @@ export function useSignIn() {
     },
   });
 
-  const signInWithGoogle = () => authClient.signIn.social({ provider: "google", callbackURL: "/" });
+  const signInWithGoogle = () => authClient.signIn.social({ provider: "google", callbackURL: "/sign-in/callback" });
 
   return { signInMutation, signInWithGoogle };
 }

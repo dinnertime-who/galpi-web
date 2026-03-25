@@ -18,6 +18,23 @@ description: >
 - 반환값은 항상 `{ result }` 또는 `{ error: string }` 형태
 - 인증이 필요한 action은 `auth.api.getSession`으로 세션 확인 후 진행
 
+## export 규칙
+
+**`export`는 async function과 type만 허용한다.** 스키마 상수(`z.object(...)`)는 절대 export하지 않는다.
+
+스키마가 있는 경우, 타입만 추출해서 export:
+
+```typescript
+// ❌ 금지 — 스키마를 직접 export
+export const SaveGalpiActionRequest = z.object({ ... });
+
+// ✅ 올바른 패턴 — 스키마는 내부 변수, 타입만 export
+const saveGalpiActionRequest = z.object({ ... });
+export type SaveGalpiActionRequest = z.infer<typeof saveGalpiActionRequest>;
+
+export async function saveGalpiAction(input: SaveGalpiActionRequest) { ... }
+```
+
 ---
 
 ## 파일 위치
@@ -51,12 +68,13 @@ import { auth } from "@/lib/auth";
 import { tryCatch } from "@/lib/try-catch";
 import { validateRequest } from "../utils";
 
-export const SaveGalpiActionRequest = z.object({
+const saveGalpiActionRequest = z.object({
   text: z.string().min(1, "기록할 문장을 입력해주세요."),
   note: z.string().optional(),
 });
+export type SaveGalpiActionRequest = z.infer<typeof saveGalpiActionRequest>;
 
-export async function saveGalpiAction(input: z.infer<typeof SaveGalpiActionRequest>) {
+export async function saveGalpiAction(input: SaveGalpiActionRequest) {
   // 1. 인증 확인
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) return { error: "인증이 필요합니다." };
@@ -89,12 +107,13 @@ import { z } from "zod";
 import { tryCatch } from "@/lib/try-catch";
 import { validateRequest } from "../utils";
 
-export const SomePublicActionRequest = z.object({
+const somePublicActionRequest = z.object({
   id: z.string().min(1),
 });
+export type SomePublicActionRequest = z.infer<typeof somePublicActionRequest>;
 
-export async function somePublicAction(input: z.infer<typeof SomePublicActionRequest>) {
-  const { data, error } = validateRequest(SomePublicActionRequest, input);
+export async function somePublicAction(input: SomePublicActionRequest) {
+  const { data, error } = validateRequest(somePublicActionRequest, input);
   if (error) return { error: error.message };
 
   const { data: result, error: actionError } = await tryCatch(async () => {
@@ -148,7 +167,9 @@ mutationFn: async (vars) => {
 ## 체크리스트
 
 - [ ] `"use server"` 선언했는가?
-- [ ] zod 스키마를 `export const XxxRequest = z.object({...})` 로 export했는가?
+- [ ] zod 스키마 상수는 `export` 없이 선언했는가? (스키마 자체를 export하지 않았는가?)
+- [ ] 스키마가 있다면 `export type XxxRequest = z.infer<typeof xxxRequest>` 로 타입만 export했는가?
+- [ ] `export`가 async function과 type에만 사용되었는가?
 - [ ] `validateRequest`로 입력값 검증했는가?
 - [ ] 인증이 필요한 경우 세션 확인을 가장 먼저 했는가?
 - [ ] DB/비동기 작업을 `tryCatch`로 감쌌는가?

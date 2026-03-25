@@ -1,7 +1,7 @@
 "use client";
 
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
-import { GoogleLogo } from "@phosphor-icons/react";
+import { GoogleLogoIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -33,7 +33,7 @@ export function SignInForm() {
 
   const onSubmit = async (values: FormValues) => {
     await signInMutation.mutateAsync(values);
-    router.push("/");
+    router.push("/sign-in/callback");
   };
 
   return (
@@ -44,7 +44,7 @@ export function SignInForm() {
       </div>
 
       <Button variant="outline" className="w-full" onClick={signInWithGoogle} disabled={signInMutation.isPending}>
-        <GoogleLogo weight="bold" />
+        <GoogleLogoIcon weight="bold" />
         Google로 계속하기
       </Button>
 
