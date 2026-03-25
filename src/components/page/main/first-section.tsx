@@ -10,6 +10,8 @@ const SAMPLE_QUOTE = {
 export async function FirstSection() {
   const { result, error } = await getMainGalpiAction();
 
+  console.log(result, error);
+
   const quote =
     !error && result
       ? {
