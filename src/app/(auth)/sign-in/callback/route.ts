@@ -15,5 +15,5 @@ export async function GET(request: NextRequest) {
     await clearPendingRecordAction();
   }
 
-  return NextResponse.redirect(new URL("/", origin));
+  return NextResponse.redirect(new URL("/", env.SITE_URL));
 }
