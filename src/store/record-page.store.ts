@@ -18,5 +18,5 @@ export const useRecordPageStore = create<RecordPageState & RecordPageActions>((s
   extractedText: null,
   setStep: (step) => set({ step }),
   setSelectedImageSrc: (imageSrc) => set({ selectedImageSrc: imageSrc }),
-  setExtractedText: (extractedText) => set({ extractedText }),
+  setExtractedText: (extractedText) => set({ extractedText: extractedText ? extractedText.slice(0, 100) : null }),
 }));

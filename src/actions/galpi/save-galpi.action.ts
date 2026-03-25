@@ -16,7 +16,7 @@ const sourceSchema = z.object({
 });
 
 const saveGalpiActionRequest = z.object({
-  text: z.string().min(1, "기록할 문장을 입력해주세요."),
+  text: z.string().min(1, "기록할 문장을 입력해주세요.").max(100, "문장은 최대 100자까지 입력할 수 있습니다."),
   note: z.string().optional(),
   source: sourceSchema.optional(),
 });

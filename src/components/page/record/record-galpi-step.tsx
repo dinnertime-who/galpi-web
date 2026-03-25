@@ -14,13 +14,10 @@ import { useSetPendingRecord } from "@/hooks/auth/use-set-pending-record";
 import { useSaveGalpi } from "@/hooks/page/record/use-save-galpi";
 import { authClient } from "@/lib/auth-client";
 import { useRecordPageStore } from "@/store/record-page.store";
-import {
-  SourceInputDialogRoot,
-  SourceInputDialogTrigger,
-} from "./source-input-dialog/source-input-dialog";
+import { SourceInputDialogRoot, SourceInputDialogTrigger } from "./source-input-dialog/source-input-dialog";
 
 const schema = z.object({
-  text: z.string().min(1, "기록할 문장을 입력해주세요."),
+  text: z.string().min(1, "기록할 문장을 입력해주세요.").max(100, "문장은 최대 100자까지 입력할 수 있습니다."),
   note: z.string().optional(),
   sourceTitle: z.string().optional(),
   sourceAuthor: z.string().optional(),
@@ -66,6 +63,7 @@ export function RecordGalpiStep() {
     if (extractedText) reset({ text: extractedText, note: "" });
   }, [extractedText, reset]);
 
+  const textValue = watch("text");
   const sourceTitle = watch("sourceTitle");
   const sourceAuthor = watch("sourceAuthor");
   const sourcePage = watch("sourcePage");
@@ -119,6 +117,15 @@ export function RecordGalpiStep() {
               aria-invalid={!!errors.text}
               {...register("text")}
             />
+            <p
+              className={`text-xs text-end w-full ${(textValue?.length ?? 0) > 100 ? "text-destructive" : "text-muted-foreground"}`}
+            >
+              {(textValue?.length ?? 0) > 100 && (
+                <span className="text-xs text-destructive">문장은 최대 100자까지 입력할 수 있습니다. </span>
+              )}
+              {textValue?.length ?? 0}/100
+            </p>
+
             <FieldError errors={[errors.text]} />
           </Field>
 
