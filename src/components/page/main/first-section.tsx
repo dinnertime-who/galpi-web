@@ -17,7 +17,7 @@ export async function FirstSection() {
     ? {
         text: data.sentence.text,
         source: data.source
-          ? `${data.source.author} <${data.source.title}> ${data.source.page ? `p. ${data.source.page}` : ""} ${data.source.subTitle ? `- ${data.source.subTitle}` : ""} 에서`
+          ? `${data.source.author} <${data.source.title}> ${data.source.page ? `p. ${data.source.page}` : ""} ${data.source.subTitle ? `- ${data.source.subTitle}` : ""} 중에서`
           : null,
       }
     : SAMPLE_QUOTE;
