@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -38,66 +37,46 @@
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
-
-  /* Galpi Design System Colors */
-  --color-galpi-text-primary: var(--galpi-text-primary);
-  --color-galpi-text-secondary: var(--galpi-text-secondary);
-  --color-galpi-text-tertiary: var(--galpi-text-tertiary);
-  --color-galpi-text-inactive: var(--galpi-text-inactive);
-  --color-galpi-surface: var(--galpi-surface);
-  --color-galpi-elevated: var(--galpi-elevated);
-  --color-galpi-muted-surface: var(--galpi-muted-surface);
-  --color-galpi-border-subtle: var(--galpi-border-subtle);
-  --color-galpi-border-strong: var(--galpi-border-strong);
-  --color-galpi-primary-bg: var(--galpi-primary-bg);
-  --color-galpi-primary-fg: var(--galpi-primary-fg);
-  --color-galpi-accent-coral: var(--galpi-accent-coral);
-  --color-galpi-accent-green: var(--galpi-accent-green);
 }
 
 :root {
   /* Galpi Design System */
-  --background: #f0eee9;
-  --foreground: #1a1918;
-  --card: #ffffff;
-  --card-foreground: #1a1918;
-  --popover: #ffffff;
-  --popover-foreground: #1a1918;
-  --primary: #d3e4f1;
-  --primary-foreground: #1a3a6b;
+  --galpi-primary: oklch(0.9115 0.0496 85.14);
+  --galpi-primary-foreground: oklch(0.4596 0.0311 9.59);
+
+  --galpi-util-background: oklch(0.9493 0.007 88.64);
+  --galpi-util-white: oklch(1 0 0);
+
+  /* Mixed Colors */
+  --galpi-primary-border: color-mix(in oklch, var(--galpi-primary-foreground), var(--galpi-util-white) 60%);
+  --galpi-primary-background: color-mix(in oklch, var(--galpi-primary), var(--galpi-util-background) 70%);
+
+  /* Design System */
+  --background: var(--galpi-util-background);
+  --foreground: var(--galpi-primary-foreground);
+  --card: var(--galpi-util-white);
+  --card-foreground: var(--galpi-primary);
+  --popover: var(--galpi-util-white);
+  --popover-foreground: var(--galpi-primary);
+  --primary: var(--galpi-primary);
+  --primary-foreground: var(--galpi-primary-foreground);
   --secondary: #edecea;
   --secondary-foreground: #6d6c6a;
   --muted: #edecea;
   --muted-foreground: #6d6c6a;
   --accent: #edecea;
-  --accent-foreground: #1a1918;
+  --accent-foreground: var(--galpi-primary-foreground);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #e5e4e1;
+  --border: var(--galpi-primary-border);
   --input: #e5e4e1;
   --ring: #d1d0cd;
   --radius: 0.625rem;
-
-  /* Galpi custom tokens */
-  --galpi-text-primary: #1a1918;
-  --galpi-text-secondary: #6d6c6a;
-  --galpi-text-tertiary: #9c9b99;
-  --galpi-text-inactive: #a8a7a5;
-  --galpi-surface: #ffffff;
-  --galpi-elevated: #fafaf8;
-  --galpi-muted-surface: #edecea;
-  --galpi-border-subtle: #e5e4e1;
-  --galpi-border-strong: #d1d0cd;
-  --galpi-primary-bg: #d3e4f1;
-  --galpi-primary-fg: #1a3a6b;
-  --galpi-accent-coral: #d89575;
-  --galpi-accent-green: #3d8a5a;
-
   --sidebar: #fafaf8;
-  --sidebar-foreground: #1a1918;
-  --sidebar-primary: #1a1918;
-  --sidebar-primary-foreground: #ffffff;
+  --sidebar-foreground: var(--galpi-primary-foreground);
+  --sidebar-primary: var(--galpi-primary-foreground);
+  --sidebar-primary-foreground: var(--galpi-util-white);
   --sidebar-accent: #edecea;
-  --sidebar-accent-foreground: #1a1918;
+  --sidebar-accent-foreground: var(--galpi-primary-foreground);
   --sidebar-border: #e5e4e1;
   --sidebar-ring: #d1d0cd;
 }
@@ -118,13 +97,13 @@
 }
 
 @utility text-galpi-heading {
-  @apply text-lg text-balance break-keep leading-[1.6] text-galpi-text-primary;
+  @apply text-lg text-balance break-keep leading-[1.6] text-primary-foreground;
 }
 
 @utility text-galpi-body {
-  @apply text-sm text-balance break-keep leading-[1.45] text-galpi-text-secondary;
+  @apply text-sm text-balance break-keep leading-[1.45] text-secondary-foreground;
 }
 
 @utility text-galpi-caption {
-  @apply text-xs text-balance break-keep leading-[1.45] text-galpi-text-tertiary;
+  @apply text-xs text-balance break-keep leading-[1.45] text-muted-foreground;
 }

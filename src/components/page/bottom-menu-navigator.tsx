@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { BookmarkIcon, BooksIcon } from "@phosphor-icons/react/ssr";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const menuItems = [
   {
@@ -25,7 +25,10 @@ export function BottomMenuNavigator({ className }: { className?: string }) {
 
   return (
     <div
-      className={cn("flex items-center justify-between bg-[#EBECEB] border-t border-primary-foreground/10", className)}
+      className={cn(
+        "flex items-center justify-between bg-(--galpi-primary-background) border-t border-border",
+        className,
+      )}
     >
       {menuItems.map((item) => (
         <div className="flex-1 flex items-center justify-center" key={item.href}>

@@ -1,9 +1,9 @@
 "use client";
 
-import { buttonVariants } from "@/components/shadcn/button";
-import { cn } from "@/lib/utils";
 import { BookmarkIcon } from "@phosphor-icons/react";
 import Link from "next/link";
+import { buttonVariants } from "@/components/shadcn/button";
+import { cn } from "@/lib/utils";
 
 export function RecordButton({ className }: { className?: string }) {
   return (
@@ -11,7 +11,7 @@ export function RecordButton({ className }: { className?: string }) {
       href="/record"
       className={cn(
         buttonVariants({ variant: "default" }),
-        "h-auto px-4 py-3 rounded-full text-sm cursor-pointer shadow shadow-primary border border-primary-foreground/10",
+        "h-auto px-4 py-3 rounded-full text-sm cursor-pointer shadow shadow-primary border border-border",
         className,
       )}
     >
