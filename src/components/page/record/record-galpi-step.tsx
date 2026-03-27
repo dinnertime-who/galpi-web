@@ -1,7 +1,7 @@
 "use client";
 
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
-import { MagnifyingGlassIcon, XIcon } from "@phosphor-icons/react/ssr";
+import { XIcon } from "@phosphor-icons/react/ssr";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -15,6 +15,7 @@ import { useSaveGalpi } from "@/hooks/page/record/use-save-galpi";
 import { authClient } from "@/lib/auth-client";
 import { useRecordPageStore } from "@/store/record-page.store";
 import { SourceInputDialogRoot, SourceInputDialogTrigger } from "./source-input-dialog/source-input-dialog";
+import { SourceSearchDialogRoot, SourceSearchDialogTrigger } from "./source-search-dialog/source-search-dialog";
 
 const schema = z.object({
   text: z.string().min(1, "기록할 문장을 입력해주세요.").max(100, "문장은 최대 100자까지 입력할 수 있습니다."),
@@ -100,6 +101,7 @@ export function RecordGalpiStep() {
   };
 
   return (
+    <SourceSearchDialogRoot onSelect={handleSourceSave}>
     <SourceInputDialogRoot
       onSave={handleSourceSave}
       initialValues={{ title: sourceTitle, author: sourceAuthor, subTitle: sourceSubTitle, page: sourcePage }}
@@ -175,10 +177,7 @@ export function RecordGalpiStep() {
 
           {/* 버튼 행 */}
           <div className="flex gap-x-2">
-            <Button variant="outline" className="flex-1" type="button">
-              <MagnifyingGlassIcon />
-              <span>출처 찾아보기</span>
-            </Button>
+            <SourceSearchDialogTrigger />
             {!hasSource && <SourceInputDialogTrigger />}
           </div>
         </div>
@@ -202,5 +201,6 @@ export function RecordGalpiStep() {
         </Button>
       </form>
     </SourceInputDialogRoot>
+    </SourceSearchDialogRoot>
   );
 }

@@ -9,6 +9,9 @@ const EnvSchema = z.object({
   GOOGLE_CLIENT_SECRET: z.string(),
 
   SITE_URL: z.url(),
+
+  NAVER_API_CLIENT_ID: z.string(),
+  NAVER_API_CLIENT_SECRET: z.string(),
 });
 
 export const env = EnvSchema.parse({
@@ -20,5 +23,8 @@ export const env = EnvSchema.parse({
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
 
   SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+
+  NAVER_API_CLIENT_ID: process.env.NAVER_API_CLIENT_ID,
+  NAVER_API_CLIENT_SECRET: process.env.NAVER_API_CLIENT_SECRET,
 });
 export type Env = z.infer<typeof EnvSchema>;
