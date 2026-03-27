@@ -12,7 +12,6 @@ export async function extractTextAction(formdata: FormData) {
     2. 잘려나가서 읽을 수 없는 글자는 제외해라.
     3. 문맥을 파악해서 오타(OCR 오류)가 있다면 자연스럽게 교정해라.
     4. 불필요한 기호나 설명 없이 오직 텍스트만 출력해라.
-    5. 줄바꿈으로 인해 단어가 잘린 경우, 자연스럽게 이어서 출력해라.
   `;
 
   try {

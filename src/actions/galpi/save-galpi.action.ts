@@ -43,6 +43,9 @@ export async function saveGalpiAction(input: SaveGalpiActionRequest) {
 
       if (source) {
         // isbn이 있으면 기존 source 재사용, 없으면 새로 생성
+        // 페이지, 부제목은 재사용하면 안됨!!
+        // source랑 book은 분리, source에 book과 연결하고 부제목, 페이지 추가
+        // source는 sentence와 연결되고 user-source는 삭제하고 user와 source는 1:1로 연결
         let existingSource = null;
         if (source.isbn) {
           existingSource = await tx.query.sources.findFirst({
@@ -58,10 +61,7 @@ export async function saveGalpiAction(input: SaveGalpiActionRequest) {
         }
 
         // user ↔ source 연결 (이미 연결돼 있으면 무시)
-        await tx
-          .insert(userSources)
-          .values({ userId: session.user.id, sourceId })
-          .onConflictDoNothing();
+        await tx.insert(userSources).values({ userId: session.user.id, sourceId }).onConflictDoNothing();
       }
 
       const [sentence] = await tx.insert(sentences).values({ userId: session.user.id, sourceId, text }).returning();
