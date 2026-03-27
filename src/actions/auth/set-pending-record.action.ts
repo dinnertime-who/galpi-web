@@ -13,6 +13,11 @@ const setPendingRecordRequest = z.object({
       author: z.string().min(1),
       subTitle: z.string().optional(),
       page: z.number().int().positive().optional(),
+      isbn: z.string().optional(),
+      image: z.string().optional(),
+      url: z.string().optional(),
+      pubdate: z.string().optional(),
+      publisher: z.string().optional(),
     })
     .optional(),
 });

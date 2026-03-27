@@ -59,7 +59,7 @@ export function BookshelfList() {
           <p className="text-galpi-caption mt-1">내가 기록한 문장들을 모아볼 수 있어요.</p>
         </div>
         <Button variant="outline" size="sm" onClick={handleSignOut}>
-          잠시 떠나기
+          로그아웃
         </Button>
       </div>
 

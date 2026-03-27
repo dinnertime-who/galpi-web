@@ -6,11 +6,11 @@ import { Button } from "@/components/shadcn/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/shadcn/dialog";
 import { Input } from "@/components/shadcn/input";
 import { type BookItem, useSearchBooks } from "@/hooks/page/record/use-search-books";
-import { SourceSearchDialogProvider, useSourceSearchDialog } from "./source-search-dialog.context";
+import { type SourceSearchSelectedBook, SourceSearchDialogProvider, useSourceSearchDialog } from "./source-search-dialog.context";
 
 type SourceSearchDialogRootProps = {
   children: React.ReactNode;
-  onSelect: (values: { title: string; author: string }) => void;
+  onSelect: (values: SourceSearchSelectedBook) => void;
 };
 
 export function SourceSearchDialogRoot({ children, onSelect }: SourceSearchDialogRootProps) {
@@ -58,7 +58,15 @@ function SourceSearchDialogView() {
   const { data: books, isLoading } = useSearchBooks(debouncedQuery);
 
   const handleSelect = (book: BookItem) => {
-    onSelect({ title: stripHtmlTags(book.title), author: book.author });
+    onSelect({
+      title: stripHtmlTags(book.title),
+      author: book.author,
+      isbn: book.isbn,
+      image: book.image,
+      link: book.link,
+      pubdate: book.pubdate,
+      publisher: book.publisher,
+    });
     setOpen(false);
   };
 

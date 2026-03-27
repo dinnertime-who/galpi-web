@@ -1,0 +1,1 @@
+ALTER TABLE "sources" ADD CONSTRAINT "sources_isbn_unique" UNIQUE("isbn");

@@ -9,6 +9,8 @@ export type BookItem = {
   image: string;
   isbn: string;
   publisher: string;
+  link: string;
+  pubdate: string;
 };
 
 type NaverBookResponse = {
