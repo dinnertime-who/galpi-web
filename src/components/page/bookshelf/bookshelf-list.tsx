@@ -1,13 +1,22 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { RecordButton } from "@/components/page/main/record-button";
+import { Button } from "@/components/shadcn/button";
 import { useMyGalpis } from "@/hooks/page/bookshelf/use-my-galpis";
+import { authClient } from "@/lib/auth-client";
 import { SentenceCard } from "./sentence-card";
 
 export function BookshelfList() {
   const { myGalpisQuery, items } = useMyGalpis();
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await authClient.signOut();
+    router.push("/sign-in");
+  };
 
   useEffect(() => {
     const el = sentinelRef.current;
@@ -44,9 +53,14 @@ export function BookshelfList() {
 
   return (
     <div className="px-4 py-6 space-y-3">
-      <div className="px-1 pb-3">
-        <h1 className="text-galpi-heading font-ridi font-bold">내 서재</h1>
-        <p className="text-galpi-caption mt-1">내가 기록한 문장들을 모아볼 수 있어요.</p>
+      <div className="px-1 pb-3 flex items-start justify-between">
+        <div>
+          <h1 className="text-galpi-heading font-ridi font-bold">내 서재</h1>
+          <p className="text-galpi-caption mt-1">내가 기록한 문장들을 모아볼 수 있어요.</p>
+        </div>
+        <Button variant="outline" size="sm" onClick={handleSignOut}>
+          잠시 떠나기
+        </Button>
       </div>
 
       {items.map((item) => (

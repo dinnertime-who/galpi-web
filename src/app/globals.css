@@ -57,7 +57,7 @@
   --card: var(--galpi-util-white);
   --card-foreground: var(--galpi-primary);
   --popover: var(--galpi-util-white);
-  --popover-foreground: var(--galpi-primary);
+  --popover-foreground: var(--galpi-primary-foreground);
   --primary: var(--galpi-primary);
   --primary-foreground: var(--galpi-primary-foreground);
   --secondary: #edecea;
