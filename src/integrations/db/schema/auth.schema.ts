@@ -1,23 +1,24 @@
 import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { createdAt, ulidPrimaryKey, updatedAt } from "../_core";
 
 /** better-auth: 사용자 */
 export const user = pgTable("user", {
-  id: text("id").primaryKey(),
+  id: ulidPrimaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").notNull(),
   image: text("image"),
-  createdAt: timestamp("created_at").notNull(),
-  updatedAt: timestamp("updated_at").notNull(),
+  createdAt: createdAt(),
+  updatedAt: updatedAt(),
 });
 
 /** better-auth: 세션 */
 export const session = pgTable("session", {
-  id: text("id").primaryKey(),
+  id: ulidPrimaryKey(),
   expiresAt: timestamp("expires_at").notNull(),
   token: text("token").notNull().unique(),
-  createdAt: timestamp("created_at").notNull(),
-  updatedAt: timestamp("updated_at").notNull(),
+  createdAt: createdAt(),
+  updatedAt: updatedAt(),
   ipAddress: text("ip_address"),
   userAgent: text("user_agent"),
   userId: text("user_id")
@@ -27,7 +28,7 @@ export const session = pgTable("session", {
 
 /** better-auth: OAuth 계정 연결 */
 export const account = pgTable("account", {
-  id: text("id").primaryKey(),
+  id: ulidPrimaryKey(),
   accountId: text("account_id").notNull(),
   providerId: text("provider_id").notNull(),
   userId: text("user_id")
@@ -40,16 +41,16 @@ export const account = pgTable("account", {
   refreshTokenExpiresAt: timestamp("refresh_token_expires_at"),
   scope: text("scope"),
   password: text("password"),
-  createdAt: timestamp("created_at").notNull(),
-  updatedAt: timestamp("updated_at").notNull(),
+  createdAt: createdAt(),
+  updatedAt: updatedAt(),
 });
 
 /** better-auth: 이메일 인증 토큰 */
 export const verification = pgTable("verification", {
-  id: text("id").primaryKey(),
+  id: ulidPrimaryKey(),
   identifier: text("identifier").notNull(),
   value: text("value").notNull(),
   expiresAt: timestamp("expires_at").notNull(),
-  createdAt: timestamp("created_at"),
-  updatedAt: timestamp("updated_at"),
+  createdAt: createdAt(),
+  updatedAt: updatedAt(),
 });

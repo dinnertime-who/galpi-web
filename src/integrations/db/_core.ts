@@ -1,9 +1,9 @@
-import { createId } from "@paralleldrive/cuid2";
+import { ulid } from "ulid";
 import { text, timestamp } from "drizzle-orm/pg-core";
 
-export const cuidPrimaryKey = () =>
+export const ulidPrimaryKey = () =>
   text("id")
-    .$defaultFn(() => createId())
+    .$defaultFn(() => ulid())
     .primaryKey();
 
 export const createdAt = () => timestamp("created_at").defaultNow().notNull();

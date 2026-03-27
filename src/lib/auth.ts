@@ -8,9 +8,7 @@ import { db } from "@/integrations/db";
 export const auth = betterAuth({
   secret: env.BETTER_AUTH_SECRET,
   baseURL: env.BETTER_AUTH_URL,
-  database: drizzleAdapter(db, {
-    provider: "pg",
-  }),
+  database: drizzleAdapter(db, { provider: "pg", }),
   emailAndPassword: {
     enabled: true,
   },
@@ -20,4 +18,7 @@ export const auth = betterAuth({
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     },
   },
+  advanced: {
+    database: { generateId: false }
+  }
 });

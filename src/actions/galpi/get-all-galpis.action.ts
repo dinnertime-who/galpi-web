@@ -39,8 +39,8 @@ export async function getAllGalpisAction(input: GetAllGalpisActionRequest = { li
       .leftJoin(sources, eq(sentences.sourceId, sources.id))
       .leftJoin(galpis, eq(galpis.sentenceId, sentences.id))
       .leftJoin(user, eq(user.id, sentences.userId))
-      .where(cursor ? lt(sentences.createdAt, new Date(cursor)) : undefined)
-      .orderBy(desc(sentences.createdAt))
+      .where(cursor ? lt(sentences.id, cursor) : undefined)
+      .orderBy(desc(sentences.id))
       .limit(limit + 1);
   });
 
@@ -58,7 +58,7 @@ export async function getAllGalpisAction(input: GetAllGalpisActionRequest = { li
 
   const hasMore = rows.length > limit;
   const items = hasMore ? rows.slice(0, limit) : rows;
-  const nextCursor = hasMore ? (items[items.length - 1].sentenceCreatedAt?.toISOString() ?? null) : null;
+  const nextCursor = hasMore ? (items[items.length - 1].sentenceId ?? null) : null;
 
   return {
     result: {

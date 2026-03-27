@@ -1,10 +1,10 @@
 import { integer, pgTable, text } from "drizzle-orm/pg-core";
-import { createdAt, cuidPrimaryKey, updatedAt } from "../_core";
+import { createdAt, ulidPrimaryKey, updatedAt } from "../_core";
 import { user } from "./auth.schema";
 
 /** 문장의 출처 (책, 아티클 등) */
 export const sources = pgTable("sources", {
-  id: cuidPrimaryKey(),
+  id: ulidPrimaryKey(),
   userId: text("user_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
