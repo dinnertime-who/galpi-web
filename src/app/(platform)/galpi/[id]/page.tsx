@@ -10,10 +10,23 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
+const queryClient = getQueryClient();
+
+export async function generateMetadata({ params }: Props) {
+  const { id } = await params;
+  const { result, error } = await queryClient.ensureQueryData(getGalpiDetailOption(id));
+
+  if (error || !result) return notFound();
+
+  return {
+    title: result.sentence.text,
+    description: `${result.source?.author} <${result.source?.title}> ${result.source?.page ? `p. ${result.source?.page}` : ""} ${result.source?.subTitle ? `- ${result.source?.subTitle}` : ""} 중에서`,
+  };
+}
+
 export default async function Page({ params }: Props) {
   const { id } = await params;
 
-  const queryClient = getQueryClient();
   const { result, error } = await queryClient.ensureQueryData(getGalpiDetailOption(id));
 
   if (error || !result) return notFound();
