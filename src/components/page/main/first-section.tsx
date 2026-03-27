@@ -24,7 +24,7 @@ export async function FirstSection() {
 
   return (
     <section className="px-6 h-[calc(100svh-4rem)] flex flex-col items-center justify-center relative">
-      {quote.source && <p className="text-galpi-caption text-center w-full ">{quote.source}</p>}
+      {quote.source && <p className="text-galpi-caption text-center w-full text-balance">{quote.source}</p>}
 
       <p className="mt-2 text-galpi-heading text-center font-ridi font-bold">{quote.text}</p>
 

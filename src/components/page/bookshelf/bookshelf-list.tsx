@@ -53,15 +53,17 @@ export function BookshelfList() {
 
   return (
     <div className="px-4 py-6 space-y-3">
-      <div className="px-1 pb-3 flex items-start justify-between">
+      <div className="px-1 pb-2 flex items-start justify-between">
         <div>
           <h1 className="text-galpi-heading font-ridi font-bold">내 서재</h1>
-          <p className="text-galpi-caption mt-1">내가 기록한 문장들을 모아볼 수 있어요.</p>
+          <p className="text-galpi-caption mt-1">내가 모아둔 갈피들을 모아볼 수 있어요.</p>
         </div>
         <Button variant="outline" size="sm" onClick={handleSignOut}>
           로그아웃
         </Button>
       </div>
+
+      <RecordButton className="w-full mb-5" />
 
       {items.map((item) => (
         <SentenceCard key={item.sentence.id} sentence={item.sentence} source={item.source} galpi={item.galpi} />

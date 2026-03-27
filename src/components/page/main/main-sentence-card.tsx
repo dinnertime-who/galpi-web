@@ -16,7 +16,7 @@ export function MainSentenceCard({ sentence, source, galpi, author }: MainSenten
 
   return (
     <article className="bg-white px-5 py-6 border border-border">
-      {sourceLabel && <p className="text-galpi-caption text-center">{sourceLabel}</p>}
+      {sourceLabel && <p className="text-galpi-caption text-center text-balance">{sourceLabel}</p>}
       <p className="mt-2 text-galpi-heading font-ridi font-bold text-center">{sentence.text}</p>
 
       {galpi?.id && author && (

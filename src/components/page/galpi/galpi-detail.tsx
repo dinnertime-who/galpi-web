@@ -25,16 +25,18 @@ export function GalpiDetail({ id }: { id: string }) {
         </button>
       </div>
 
-      <div className="flex-1 px-6 py-6 flex flex-col gap-y-3">
-        {sourceLabel && <p className="text-galpi-caption text-center w-full">{sourceLabel}</p>}
+      <div className="flex-1 px-6 py-6 flex flex-col gap-y-3 ">
+        <div className="flex flex-col gap-y-3 py-[5dvh]">
+          {sourceLabel && <p className="text-galpi-caption text-center w-full text-balance">{sourceLabel}</p>}
 
-        <p className="text-galpi-heading font-ridi font-bold text-center">{data?.result?.sentence.text}</p>
+          <p className="text-galpi-heading text-xl font-ridi font-bold text-center">{data?.result?.sentence.text}</p>
 
-        <p className="text-galpi-caption text-end w-full text-primary-foreground/70">— {data?.result?.author.name}</p>
+          <p className="text-galpi-caption text-end w-full text-primary-foreground/70">— {data?.result?.author.name}</p>
+        </div>
 
         {data?.result?.galpi.note && (
           <>
-            <hr className="border-border" />
+            <hr className="border-border my-[5dvh]" />
             <p className="text-galpi-body whitespace-pre-wrap text-center font-ridi">{data?.result?.galpi.note}</p>
           </>
         )}
