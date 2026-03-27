@@ -20,15 +20,19 @@ export function MainSentenceCard({ sentence, source, galpi, author }: MainSenten
       <p className="mt-2 text-galpi-heading font-ridi font-bold text-center">{sentence.text}</p>
 
       {galpi?.id && author && (
-        <Link
-          href={`/galpi/${galpi.id}`}
-          className="mt-4 text-galpi-caption text-end w-full block text-primary-foreground/70 underline-offset-2 hover:underline"
-        >
-          — {author.name}
-        </Link>
+        <p className="text-end">
+          <span className="mt-4 text-galpi-caption text-primary-foreground/70 underline-offset-2">— {author.name}</span>
+        </p>
       )}
 
-      {galpi?.note && <p className="mt-3 text-galpi-caption text-primary-foreground/70 line-clamp-2">"{galpi.note}"</p>}
+      {galpi?.note && (
+        <Link
+          href={`/galpi/${galpi.id}`}
+          className="mt-3 text-galpi-caption text-primary-foreground/70 line-clamp-2 text-center  hover:underline"
+        >
+          {galpi.note}
+        </Link>
+      )}
     </article>
   );
 }

@@ -81,8 +81,8 @@ export async function getAllGalpisAction(input: GetAllGalpisActionRequest = { li
           ? {
               id: row.galpiId,
               note: row.galpiNote
-                ? row.galpiNote.length > 50
-                  ? `${row.galpiNote.slice(0, 50)}...`
+                ? row.galpiNote.length > 100
+                  ? `${row.galpiNote.slice(0, 100)}...`
                   : row.galpiNote
                 : undefined,
             }

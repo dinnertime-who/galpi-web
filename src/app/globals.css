@@ -101,9 +101,9 @@
 }
 
 @utility text-galpi-body {
-  @apply text-sm text-balance break-keep leading-[1.45] text-secondary-foreground;
+  @apply text-sm break-keep text-balance leading-[1.45] text-secondary-foreground;
 }
 
 @utility text-galpi-caption {
-  @apply text-xs text-balance break-keep leading-[1.45] text-muted-foreground;
+  @apply text-xs break-keep leading-[1.45] text-muted-foreground;
 }

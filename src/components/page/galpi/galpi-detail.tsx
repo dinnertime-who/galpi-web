@@ -35,7 +35,7 @@ export function GalpiDetail({ id }: { id: string }) {
         {data?.result?.galpi.note && (
           <>
             <hr className="border-border" />
-            <p className="text-galpi-body whitespace-pre-wrap font-ridi">{data?.result?.galpi.note}</p>
+            <p className="text-galpi-body whitespace-pre-wrap text-center font-ridi">{data?.result?.galpi.note}</p>
           </>
         )}
       </div>

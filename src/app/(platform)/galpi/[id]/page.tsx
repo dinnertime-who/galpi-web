@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props) {
   if (error || !result) return notFound();
 
   return {
-    title: result.sentence.text,
+    title: result.sentence.text.length > 20 ? `${result.sentence.text.slice(0, 20)}...` : result.sentence.text,
     description: `${result.source?.author} <${result.source?.title}> ${result.source?.page ? `p. ${result.source?.page}` : ""} ${result.source?.subTitle ? `- ${result.source?.subTitle}` : ""} 중에서`,
   };
 }

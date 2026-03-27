@@ -145,7 +145,7 @@ export function RecordGalpiStep() {
         {/* 출처 섹션 */}
         <div className="flex flex-col gap-y-3">
           <div className="w-full text-start">
-            <h3 className="text-galpi-heading font-ridi">출처(선택)</h3>
+            <h3 className="text-galpi-heading font-ridi">출처</h3>
             <p className="text-galpi-caption">어떤 책에서 찾은 문장이신가요?</p>
           </div>
 

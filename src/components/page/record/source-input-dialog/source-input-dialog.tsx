@@ -77,14 +77,10 @@ function SourceInputDialogView() {
 
           <Field>
             <FieldLabel>
-              중간 제목
+              부 제목
               <span className="ml-1 text-xs text-muted-foreground">(선택)</span>
             </FieldLabel>
-            <Input
-              placeholder="부제목 또는 챕터 제목"
-              value={subTitle}
-              onChange={(e) => setSubTitle(e.target.value)}
-            />
+            <Input placeholder="부제목 또는 챕터 제목" value={subTitle} onChange={(e) => setSubTitle(e.target.value)} />
           </Field>
 
           <Field>
