@@ -28,7 +28,7 @@ export function MainSentenceCard({ sentence, source, galpi, author }: MainSenten
       {galpi?.note && (
         <Link
           href={`/galpi/${galpi.id}`}
-          className="mt-3 text-galpi-caption text-primary-foreground/70 line-clamp-2 text-center  hover:underline"
+          className="mt-3 text-galpi-caption text-primary-foreground/70 line-clamp-2 text-center underline"
         >
           {galpi.note}
         </Link>

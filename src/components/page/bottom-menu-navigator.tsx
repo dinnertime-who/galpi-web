@@ -15,7 +15,7 @@ const menuItems = [
   {
     href: "/bookshelf",
     icon: BooksIcon,
-    label: "책장",
+    label: "서재",
     isActive: (pathname: string) => pathname === "/bookshelf",
   },
 ];

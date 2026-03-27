@@ -45,17 +45,12 @@ export function BookshelfList() {
   return (
     <div className="px-4 py-6 space-y-3">
       <div className="px-1 pb-3">
-        <h1 className="text-galpi-heading font-ridi font-bold">내 책장</h1>
+        <h1 className="text-galpi-heading font-ridi font-bold">내 서재</h1>
         <p className="text-galpi-caption mt-1">내가 기록한 문장들을 모아볼 수 있어요.</p>
       </div>
 
       {items.map((item) => (
-        <SentenceCard
-          key={item.sentence.id}
-          sentence={item.sentence}
-          source={item.source}
-          galpi={item.galpi}
-        />
+        <SentenceCard key={item.sentence.id} sentence={item.sentence} source={item.source} galpi={item.galpi} />
       ))}
 
       <div ref={sentinelRef} className="h-4" />
